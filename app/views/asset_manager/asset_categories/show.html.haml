@@ -1,0 +1,11 @@
+= title @asset_category.title
+
+.well
+  %table.table.table-bordered.table-condensed
+    %tr
+      %td= t('.title')
+      %td= @asset_category.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(", ")
+
+= link_to t('.edit'), edit_asset_category_path(@asset_category)
+\|
+= link_to t('.back'), asset_categories_path

@@ -1,0 +1,29 @@
+= title @asset.title
+
+.well
+  %table.table.table-bordered.table-condensed
+    %tr
+      %td= t('.title')
+      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(", ")
+    %tr
+      %td= t('.description')
+      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.description}" }.join(", ")
+    %tr
+      %td= t('.asset_category')
+      %td= @asset.asset_category.title rescue ''
+    %tr
+      %td= t('.public')
+      %td= @asset.public
+    %tr
+      %td= t('.tags')
+      %td= @asset.tag_list
+    %tr
+      %td= t('.file_type')
+      %td= @asset.file_type
+    %tr
+      %td= t('.asset_instances')
+      %td= render partial: 'asset_manager/asset_instances/asset_instances', locals: { collection: @asset.asset_instances }
+
+= link_to t('.edit'), edit_asset_path(@asset)
+\|
+= link_to t('.back'), assets_path(public: @asset.public)

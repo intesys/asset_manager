@@ -1,0 +1,11 @@
+- content_for :header do
+  = render 'layouts/asset_manager/partials/header'
+
+- content_for :content do
+  .container-fluid
+    .row-fluid
+      = render 'layouts/asset_manager/partials/flash_messages'
+      = yield
+    = render 'layouts/asset_manager/partials/footer'
+
+= render 'layouts/asset_manager/base'

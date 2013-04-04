@@ -1,0 +1,79 @@
+en:
+  asset_manager:
+    asset_categories:
+      controller:
+        asset_category_successfully_create: Asset category was successfully created
+        asset_category_successfully_update: Asset category was successfully updated
+      edit:
+        back: Back
+        show: Show
+      form:
+        translations: Translations
+      index:
+        actions: Actions
+        are_you_sure: Are you sure?
+        asset_categories: Asset Categories
+        destroy: Destroy
+        edit: Edit
+        id: Id
+        new_asset_category: New Asset Category
+        show: Show
+        title: Title
+      new:
+        back: Back
+      show:
+        back: Back
+        edit: Edit
+        title: Title
+    assets:
+      controller:
+        asset_successfully_create: Asset was successfully created
+        asset_successfully_update: Asset was successfully updated
+      edit:
+        back: Back
+        show: Show
+      form:
+        files: Files
+        general: General
+        multiple: Multiple
+        single: Single
+        translations: Translations
+      index:
+        actions: Actions
+        are_you_sure: Are you sure?
+        asset_category: Asset Category
+        asset_instances: Asset Instances
+        assets: Assets
+        description: Description
+        destroy: Destroy
+        edit: Edit
+        file_type: File Type
+        id: Id
+        new_asset: New Asset
+        private: Private
+        public: Public
+        show: Show
+        tags: Tags
+        title: Title
+      new:
+        back: Back
+      select:
+        cancel: Cancel
+        choose_some_asset_categories: Choose some asset categories
+        choose_some_tags: Choose some tags
+        search: Search
+        select: Select
+      show:
+        asset_category: Asset Category
+        asset_instances: Asset Instances
+        back: Back
+        description: Description
+        edit: Edit
+        file_type: File type
+        public: Public
+        tags: Tags
+        title: Title
+  search_results:
+    all: All
+    results: Results
+

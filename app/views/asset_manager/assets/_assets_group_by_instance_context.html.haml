@@ -1,0 +1,5 @@
+- unless collection.empty?
+  .resources.asset_manager_assets
+    - collection.each do |resource|
+      - size ||= nil
+      = render partial: 'asset_manager/assets/asset_group_by_instance_context', locals: { resource: resource, size: size }

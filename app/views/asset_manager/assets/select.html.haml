@@ -1,0 +1,34 @@
+.sx
+  .search
+    .top
+      .well
+        = form_tag(select_assets_path, method: 'get', class: 'form-inline', id: "search") do
+          .row-fluid
+            .span5
+              = select_tag :asset_categories, options_from_collection_for_select(@asset_categories, 'id', 'title', params[:asset_categories]), multiple: 'multiple', name: 'asset_categories[]', :"data-placeholder" => t('.choose_some_asset_categories')
+            .span5
+              = select_tag :tags, options_from_collection_for_select(@tags, 'name', 'name', params[:tags]), multiple: 'multiple', name: 'tags[]', :"data-placeholder" => t('.choose_some_tags')
+            .span2
+              = hidden_field_tag :owner, @owner
+              = hidden_field_tag :id, @id
+              = hidden_field_tag :field, @field
+              = hidden_field_tag :multiple, @multiple
+              = submit_tag :submit, class: 'btn btn-primary', value: t('.search')
+  .collection.clearfix
+    #sortable1.connectedSortable.clearfix
+      = render partial: 'assets_draggable', locals: {assets: @assets, pagination: true}
+.dx
+  .associations
+    .assets-container-drag
+      #sortable2.connectedSortable
+        = render partial: 'assets_draggable', locals: {assets: @resource_assets}
+    .actions
+      %button.btn.btn-primary.select= t('.select')
+      %button.btn.cancel= t('.cancel')
+
+.param-max.hide= @max
+.param-multiple.hide= @multiple
+.param-field.hide= @field
+.param-field-name.hide= "#{@owner.demodulize.underscore}[#{@owner.constantize.asset_field_name(@field, @multiple)}]#{@multiple ? '[]' : ''}"
+
+

@@ -1,0 +1,12 @@
+- unless collection.empty?
+  .group
+    - if collection.count == 1 && collection.first.instance_context.to_sym == AssetManager::AssetInstance.instance_context_all
+      .item
+        = render partial: 'asset_manager/asset_instances/asset_instance_as_flag', locals: { resource: collection.first }
+    - else
+      - AssetManager::AssetInstance.instance_contexts.each do |ic|
+        .item
+          - if (resource = collection.find_by_instance_context(ic.to_s))
+            = render partial: 'asset_manager/asset_instances/asset_instance_as_flag', locals: { resource: resource }
+          - else
+            %span= ic

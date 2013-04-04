@@ -1,0 +1,57 @@
+= title t('.assets')
+
+%p= link_to t('.new_asset'), new_asset_path(public: @public), class: 'btn'
+
+.well.filters
+  = form_for @search, url: assets_path, html: { method: :get, style: 'margin-bottom: 0' } do |f|
+    %h4 Filter
+    .row-fluid
+      .span2
+        = f.label :translations_title_or_translations_description_contains, "Title or Description contains"
+        = f.text_field :translations_title_or_translations_description_contains
+      .span2
+        = f.label :asset_category_id_equals
+        = f.collection_select :asset_category_id_equals, AssetManager::AssetCategory.sorted, :id, :title, include_blank: true
+      .span2
+        = f.label :public_equals
+        = f.select :public_equals, [true, false], include_blank: true
+      .span2
+        = f.label :file_type_equals
+        = f.text_field :file_type_equals
+      .span2
+        = f.label :submit, raw("&nbsp;")
+        = f.submit class: 'btn btn-primary', value: 'Search'
+        = link_to 'clear', assets_path
+
+- if @assets.empty?
+  = t('.no_results', default: 'No results')
+- else
+  %table.table.table-striped.table-bordered.table-hover.table-condensed
+    %thead
+      %tr
+        %th= t('.id')
+        %th= t('.title')
+        %th= t('.description')
+        %th= t('.asset_category')
+        %th= t('.public')
+        %th= t('.tags')
+        %th= t('.file_type')
+        %th= t('.asset_instances')
+        %th.actions= t('.actions')
+    %tbody
+      - @assets.each do |asset|
+        %tr
+          %td= asset.id
+          %td= asset.title
+          %td= asset.description
+          %td= asset.asset_category.title rescue ''
+          %td= asset.public
+          %td= asset.tag_list
+          %td= asset.file_type
+          %td= render partial: 'asset_manager/asset_instances/asset_instances', locals: { collection: asset.asset_instances }
+          %td.actions
+            %ul
+              %li= show_resource_link(asset)
+              %li= edit_resource_link(asset)
+              %li= delete_resource_link(asset)
+  = paginate @assets, theme: "bootstrap"

@@ -1,0 +1,7 @@
+- unless assets.empty?
+  - assets.each do |asset|
+    = render partial: 'asset_draggable', locals: { asset: asset }
+  - pagination ||= false
+  - if pagination
+    .assets-navigation
+      = paginate @assets, remote: true

@@ -1,0 +1,9 @@
+- unless resource.nil?
+  .resource[resource]
+    - if resource.asset.public && resource.asset.is_image?
+      = image_tag resource.file.url(:thumb), class: 'img-polaroid', alt: ""
+    - else
+      = image_tag am_icon_url(resource.asset.file_type, nil, false), alt: ""
+    %span
+      = "(#{resource.instance_context})"
+      = resource.file_identifier

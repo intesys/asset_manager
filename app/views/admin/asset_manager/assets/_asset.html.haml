@@ -1,0 +1,7 @@
+- unless resource.nil?
+  .resource.draggable[resource]{ data: { id: resource.id } }
+    .thumbnail
+      .caption
+        %h5= resource.title
+        .details
+          = render partial: 'asset_manager/asset_instances/asset_instances', locals: { collection: resource.asset_instances }

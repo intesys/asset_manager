@@ -1,0 +1,8 @@
+- unless resource.nil?
+  .resource[resource]
+    - size ||= nil
+    .presentation{style: "background: url(#{am_icon_url(resource.file_type, size, true)}) no-repeat 0 0;"}
+      %p.title= resource.title
+      - unless resource.description.nil?
+        %p.description= resource.description
+    = render partial: 'asset_manager/asset_instances/asset_instances_as_flag', locals: { collection: resource.asset_instances }

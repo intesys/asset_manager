@@ -1,0 +1,98 @@
+/* The plugins folder contains a plugins.css.sass file that we use to include
+ * all the plugins necessary for our application. In this folder we can also
+ * put configuration files for individual plugins.
+ *
+ * Structure example:
+ *   plugins/
+ *   |--plugins.css.sass
+ *   |--my_plugin.css.sass
+ *   |--my_complex_plugin/
+ *   |  |--fonts.css.sass
+ *   |  |--colors.css.sass
+ */
+@import "plugins/**/*"
+
+/* In base we keep things like CSS resets, element defaults (e.g. link colors),
+ * font settings etc. The category is largely dominated by element selectors.
+ * We try to be very careful about what we put in this folder in order not to
+ * not loose flexibility down the road.
+ *
+ * Structure example:
+ *   base/
+ *   |--fonts.css.sass
+ *   |--colors.css.sass
+ */
+@import "base/**/*"
+
+/* The files for layout elements such as "header", "footer", "sidebar", etc.
+ * are kept in the layout folder.
+ *
+ * Structure example:
+ *   layout/
+ *   |--header.css.sass
+ *   |--footer.css.sass
+ */
+@import "layout/**/*"
+
+/* This folder is made up of independent modules and submodules. Examples for
+ * modules could be things like: search-box, dialog, navigation, menu,
+ * content-box. While submodules are more specific versions of these modules
+ * such as: dialog-wide, navigation-tabbed, menu-dropdown.
+ *
+ * The ideal module is completely independent of its context and should work
+ * within any layout container or other module. If a specific context requires
+ * changes to a module you rather create a submodule that describes the
+ * context, instead changing styles based on the parent (e.g.
+ * .content-box-narrow instead of #sidebar .content-box).
+ *
+ * Structure example:
+ *   modules/
+ *   |--search-box.css.sass
+ *   |--dialog.css.sass
+ */
+//@import "modules/**/*"
+
+/* The resources folder is an important one and should contain various
+ * representations of your resources. A blog post, for example, probably should
+ * look slightly different as a search result than in a "latest posts" list on
+ * the home page.
+ *
+ * In order to avoid duplication and to uniform presentation we try to define
+ * as much as possible of our resources' styling in the "resource" classes.
+ *
+ * Structure example:
+ *   resources/
+ *   |--resource/
+ *   |  |--resource.css.sass
+ *   |  |--excerpt_resource.css.sass
+ *   |--posts/
+ *   |  |--post.css.sass
+ *   |  |--excerpt_post.css.sass
+ *   |  |--link_post.css.sass
+ *
+ */
+@import "resources/**/*"
+
+/* Sometimes it can be useful to make a small customization to a particular
+ * controller/view. NOTE: Care should be taken to avoid putting styling in
+ * these files unless it really depends on the context.
+ *
+ * Structure example:
+ *   controllers/
+ *   |--news.css.sass
+ *   |--pages.css.sass
+ */
+@import "controllers/**/*"
+
+.translation_missing
+  background: red !important
+  color: #fff !important
+
+table .actions
+  ul, li
+    margin: 0
+    padding: 0
+  li
+    list-style: none inside
+    display: inline
+

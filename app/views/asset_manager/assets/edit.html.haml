@@ -1,0 +1,7 @@
+%h1 Editing asset
+
+= render 'form'
+
+= link_to t('.show'), @asset
+\|
+= link_to t('.back'), assets_path(public: @asset.public)

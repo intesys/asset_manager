@@ -1,0 +1,71 @@
+$sx-width: 80%
+$dx-width: 100% - $sx-width
+
+body.assets
+  &.index
+    .nav-pills
+      margin-bottom: 10px
+    .filters
+      form
+        h4
+          margin-top: 0
+        label
+          font-size: 13px
+        input[type=text]
+          width: 100%
+          padding-left: 0
+          padding-right: 0
+        select
+          width: 100%
+  &.select
+    padding: 0
+    .sx
+      $sx-internal-width: 95%
+      float: left
+      width: $sx-width
+      .search
+        position: fixed
+        width: $sx-width
+        background: white
+        .top
+          width: $sx-internal-width
+          .well
+            margin-bottom: 0
+            form
+              margin: 0
+              .chzn-container
+                width: 100% !important
+              &.loading
+                background: url(/assets/loader.gif) no-repeat right center
+      .collection
+        padding-top: 82px
+      #infscr-loading
+        clear: both
+        padding: 1em 0
+        width: $sx-internal-width
+        text-align: center
+    .dx
+      float: right
+      width: $dx-width
+      .associations
+        position: fixed
+        top: 0
+        bottom: 0
+        width: $dx-width
+        .assets-container-drag
+          border: 1px dotted #ccc
+          padding: 10px
+          margin-bottom: 1em
+          height: 85%
+        #sortable2
+          height: 100%
+          overflow: auto
+  .form-horizontal
+    .files
+      .control-group
+        margin-bottom: 0
+      .item
+        margin: 2px 0 20px 180px
+        .resource.asset-instance
+          table
+            margin-bottom: 0
