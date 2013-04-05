@@ -8,28 +8,13 @@
 $ ->
   $(document).ready ->
     if $('body').hasClass('assets select')
-      #window_height = $(window).height()
-      ## Altezze dx
-      #new_height_dx = window_height - 70
-      #$('.assets-container-drag, #sortable2').height(new_height_dx + 'px')
-
-      # Ias
+      # Ias - Infinite scroll
       $.ias
         container: "#sortable1.connectedSortable"
         item: ".resource.asset"
         pagination: ".assets-navigation"
         next: "a[rel=next]"
         loader: '<img src="/assets/ias/loader.gif" alt="Loading..." />'
-      ##$('#sortable1.connectedSortable').infinitescroll
-      ##  navSelector : ".sx .assets-navigation"
-      ##  nextSelector : ".sx .assets-navigation .next a"
-      ##  itemSelector : ".sx .resource.asset"
-      ##  debug : true
-      ##  loading :
-      ##    img : '/assets/loader.gif'
-      ##    msgText : ''
-      ##    speed : 'slow'
-      ##    finishedMsg: "<em>Finish.</em>"
 
       # Params
       param_max = parseInt($('.param-max').html())
@@ -42,32 +27,14 @@ $ ->
 
       # Form chosen and submit
       $form_search_select.chosen()
-      #$form_search_select.change ->
-      #  $form_search.submit()
 
+      # Submit form
       $form_search.submit ->
         $(this).addClass('loading')
         $("#sortable2 .resource.asset").each ->
           $form_search.append('<input type="hidden" name="ids[]" value="' + $(this).attr('data-id') + '" />')
 
-        #data = $form_search.serialize();
-        #$("#sortable2 .resource.asset").each ->
-        #  data += '&ids[]=' + $(this).attr('data-id')
-        #data = $form_search.serialize();
-        #$("#sortable2 .resource.asset").each ->
-        #  data += '&ids[]=' + $(this).attr('data-id')
-        #$.ajax
-        #  url: $form_search.attr('action')
-        #  data: data
-        #  dataType: 'script'
-        #  beforeSend: ->
-        #    $form_search.addClass('loading')
-        #  success: (response)->
-        #    #$(window).scrollTop('-200px')
-        #    $form_search.removeClass('loading')
-        #return false
-
-      # Sortable
+      # Sortable - Drag and Drop
       $("#sortable1, #sortable2").sortable
         connectWith: ".connectedSortable"
       .disableSelection();
@@ -76,9 +43,11 @@ $ ->
           $(ui.sender).sortable('cancel')
           alert "Limite massimo superato"
 
-      # Actions
+      # Action Cancel
       $('button.cancel').click ->
         closeModal()
+
+      # Action Select
       $('button.select').click ->
         ids = []
         $("#sortable2 .resource.asset:lt(" + param_max + ")").each ->
@@ -93,8 +62,8 @@ $ ->
             success: (result)->
               endSelection(result, ids)
 
+      # End Selection
       endSelection = (xhtml, ids) ->
-        # Original href
         $link_select = $dinamyc_assets_field.siblings("a")
         original_href = $link_select.attr('data-href')
         if ids.length > 0
@@ -107,8 +76,8 @@ $ ->
           original_href += '&ids[]=no'
         $dinamyc_assets_field.html(xhtml)
         $link_select.attr('href', original_href);
-        # Close modal
         closeModal()
 
+      # Close Modal
       closeModal = ->
         parent.$.fancybox.close()
