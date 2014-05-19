@@ -28,7 +28,7 @@ Since Asset Manager is a Rails engine you need to mount it in your application:
 
 Once mounted you can access the administration interface by visiting /asset_manager in a browser.
 
-{http://www.intesys.it/asset_manager/docs/am-repository.jpg}[http://www.intesys.it/asset_manager/docs/am-repository.jpg]
+{http://www.intesys.it/asset_manager/docs/repository.jpg}[http://www.intesys.it/asset_manager/docs/repository.jpg]
 
 From here you can manage all your application's assets: jpg, png, pdf, zip, etc.
 For the images that you upload a series of (customizable) versions will be created automatically.
@@ -68,9 +68,9 @@ The Asset Manager will be opened in a modal window so you application needs to p
 
 Then you will have something similar to:
 
-{http://www.intesys.it/asset_manager/docs/am-main_image-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-main_image-ass.jpg]
-{http://www.intesys.it/asset_manager/docs/am-pictures-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-pictures-ass.jpg]
-{http://www.intesys.it/asset_manager/docs/am-downloads-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-downloads-ass.jpg]
+{http://www.intesys.it/asset_manager/docs/main_image-ass.jpg}[http://www.intesys.it/asset_manager/docs/main_image-ass.jpg]
+{http://www.intesys.it/asset_manager/docs/pictures-ass.jpg}[http://www.intesys.it/asset_manager/docs/pictures-ass.jpg]
+{http://www.intesys.it/asset_manager/docs/downloads-ass.jpg}[http://www.intesys.it/asset_manager/docs/downloads-ass.jpg]
 
 Now that we have associated assets with our records we can use one of the view helpers provided by Asset Manager to present them to the end-user:
   = am_render(@product, :main_image)
