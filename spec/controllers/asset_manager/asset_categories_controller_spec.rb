@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe AssetCategoriesController do
+describe AssetManager::AssetCategoriesController do
 
   # This should return the minimal set of attributes required to create a valid
   # AssetCategory. As you add validations to AssetCategory, be sure to
@@ -34,105 +34,105 @@ describe AssetCategoriesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all asset_categories as @asset_categories" do
+  describe 'GET index' do
+    it 'assigns all asset_categories as @asset_categories' do
       asset_category = AssetCategory.create! valid_attributes
       get :index, {}, valid_session
       assigns(:asset_categories).should eq([asset_category])
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested asset_category as @asset_category" do
+  describe 'GET show' do
+    it 'assigns the requested asset_category as @asset_category' do
       asset_category = AssetCategory.create! valid_attributes
-      get :show, {:id => asset_category.to_param}, valid_session
+      get :show, { id: asset_category.to_param }, valid_session
       assigns(:asset_category).should eq(asset_category)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new asset_category as @asset_category" do
+  describe 'GET new' do
+    it 'assigns a new asset_category as @asset_category' do
       get :new, {}, valid_session
       assigns(:asset_category).should be_a_new(AssetCategory)
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested asset_category as @asset_category" do
+  describe 'GET edit' do
+    it 'assigns the requested asset_category as @asset_category' do
       asset_category = AssetCategory.create! valid_attributes
-      get :edit, {:id => asset_category.to_param}, valid_session
+      get :edit, { id: asset_category.to_param }, valid_session
       assigns(:asset_category).should eq(asset_category)
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new AssetCategory" do
-        expect {
-          post :create, {:asset_category => valid_attributes}, valid_session
-        }.to change(AssetCategory, :count).by(1)
+  describe 'POST create' do
+    describe 'with valid params' do
+      it 'creates a new AssetCategory' do
+        expect do
+          post :create, { asset_category: valid_attributes }, valid_session
+        end.to change(AssetCategory, :count).by(1)
       end
 
-      it "assigns a newly created asset_category as @asset_category" do
-        post :create, {:asset_category => valid_attributes}, valid_session
+      it 'assigns a newly created asset_category as @asset_category' do
+        post :create, { asset_category: valid_attributes }, valid_session
         assigns(:asset_category).should be_a(AssetCategory)
         assigns(:asset_category).should be_persisted
       end
 
-      it "redirects to the created asset_category" do
-        post :create, {:asset_category => valid_attributes}, valid_session
+      it 'redirects to the created asset_category' do
+        post :create, { asset_category: valid_attributes }, valid_session
         response.should redirect_to(AssetCategory.last)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved asset_category as @asset_category" do
+    describe 'with invalid params' do
+      it 'assigns a newly created but unsaved asset_category as @asset_category' do
         # Trigger the behavior that occurs when invalid params are submitted
         AssetCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:asset_category => {}}, valid_session
+        post :create, { asset_category: {} }, valid_session
         assigns(:asset_category).should be_a_new(AssetCategory)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         AssetCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:asset_category => {}}, valid_session
-        response.should render_template("new")
+        post :create, { asset_category: {} }, valid_session
+        response.should render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested asset_category" do
+  describe 'PUT update' do
+    describe 'with valid params' do
+      it 'updates the requested asset_category' do
         asset_category = AssetCategory.create! valid_attributes
         # Assuming there are no other asset_categories in the database, this
         # specifies that the AssetCategory created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        AssetCategory.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => asset_category.to_param, :asset_category => {'these' => 'params'}}, valid_session
+        AssetCategory.any_instance.should_receive(:update_attributes).with('these' => 'params')
+        put :update, { id: asset_category.to_param, asset_category: { 'these' => 'params' } }, valid_session
       end
 
-      it "assigns the requested asset_category as @asset_category" do
+      it 'assigns the requested asset_category as @asset_category' do
         asset_category = AssetCategory.create! valid_attributes
-        put :update, {:id => asset_category.to_param, :asset_category => valid_attributes}, valid_session
+        put :update, { id: asset_category.to_param, asset_category: valid_attributes }, valid_session
         assigns(:asset_category).should eq(asset_category)
       end
 
-      it "redirects to the asset_category" do
+      it 'redirects to the asset_category' do
         asset_category = AssetCategory.create! valid_attributes
-        put :update, {:id => asset_category.to_param, :asset_category => valid_attributes}, valid_session
+        put :update, { id: asset_category.to_param, asset_category: valid_attributes }, valid_session
         response.should redirect_to(asset_category)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the asset_category as @asset_category" do
+    describe 'with invalid params' do
+      it 'assigns the asset_category as @asset_category' do
         asset_category = AssetCategory.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         AssetCategory.any_instance.stub(:save).and_return(false)
-        put :update, {:id => asset_category.to_param, :asset_category => {}}, valid_session
+        put :update, { id: asset_category.to_param, asset_category: {} }, valid_session
         assigns(:asset_category).should eq(asset_category)
       end
 
@@ -140,23 +140,23 @@ describe AssetCategoriesController do
         asset_category = AssetCategory.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         AssetCategory.any_instance.stub(:save).and_return(false)
-        put :update, {:id => asset_category.to_param, :asset_category => {}}, valid_session
-        response.should render_template("edit")
+        put :update, { id: asset_category.to_param, asset_category: {} }, valid_session
+        response.should render_template('edit')
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested asset_category" do
+  describe 'DELETE destroy' do
+    it 'destroys the requested asset_category' do
       asset_category = AssetCategory.create! valid_attributes
       expect {
-        delete :destroy, {:id => asset_category.to_param}, valid_session
+        delete :destroy, { id: asset_category.to_param }, valid_session
       }.to change(AssetCategory, :count).by(-1)
     end
 
-    it "redirects to the asset_categories list" do
+    it 'redirects to the asset_categories list' do
       asset_category = AssetCategory.create! valid_attributes
-      delete :destroy, {:id => asset_category.to_param}, valid_session
+      delete :destroy, { id: asset_category.to_param }, valid_session
       response.should redirect_to(asset_categories_url)
     end
   end

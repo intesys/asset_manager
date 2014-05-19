@@ -1,11 +1,11 @@
 # Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+ENV['RAILS_ENV'] = 'test'
 
-require File.expand_path("../dummy/config/environment.rb", __FILE__)
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
-#require 'factory_girl'
-#require 'capybara/rspec'
-#require 'rspec/autorun'
+# require 'factory_girl'
+# require 'capybara/rspec'
+# require 'rspec/autorun'
 require 'shoulda-matchers'
 
 Rails.backtrace_cleaner.remove_silencers!

@@ -1,13 +1,15 @@
 .navbar.navbar-inverse.navbar-fixed-top
   .navbar-inner
     .container-fluid
-      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+      %a.btn.btn-navbar{data: {target: '.nav-collapse', toggle: 'collapse'}}
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to "Asset Manager", root_path, class: 'brand'
+      = link_to 'Asset Manager', root_path, class: 'brand'
       .nav-collapse.collapse
         %ul.nav
-          -#%li.active= link_to "Home", root_path
-          %li= link_to "Assets", assets_path
-          %li= link_to "Asset Categories", asset_categories_path
+          %li{ class: (controller_name == 'assets' ? 'active' : '') }
+            = link_to t('.assets'), assets_path
+          - if AssetManager.with_categories
+            %li{ class: (controller_name == 'asset_categories' ? 'active' : '') }
+              = link_to t('.asset_categories'), asset_categories_path

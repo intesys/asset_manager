@@ -1,0 +1,26 @@
+#quick_upload
+  margin-bottom: 1em
+  a.link-upload
+    color: #888
+    font-size: 14px
+    i
+      font-size: 20px
+    span
+      position: relative
+      top: -1px
+      font-weight: bold
+    &:hover
+      text-decoration: none
+  &.open a.link-upload, a.link-upload:hover
+    color: #86C441
+  .well
+    +box-shadow(0 0 0)
+    display: none
+    background: darken(whitesmoke, 5%)
+    border-color: darken(#e3e3e3, 5%)
+    form
+      margin-bottom: 0
+  &.open
+    .well
+      display: block
+

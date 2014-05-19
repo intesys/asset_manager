@@ -1,0 +1,10 @@
+.nested-fields
+  .well.well-small
+    = f.inputs do
+      %div{ class: "#{AssetManager::AssetInstance.instance_contexts_with_all.length == 1 ? 'hide' : ''}" }
+        = f.input :instance_context, as: :select, collection: AssetManager::AssetInstance.instance_contexts_with_all, input_html: { style: 'width: 60px' }, label: t('.instance_context')
+      = f.input :file, as: :file
+      - unless f.object.file.blank? || f.object.id.blank?
+        .item= render partial: '/asset_manager/asset_instances/asset_instance', locals: { resource: f.object }
+      - unless AssetManager::AssetInstance.instance_contexts_with_all.length == 1
+        = link_to_remove_association '(x) ' + t('.remove_asset_instance'), f

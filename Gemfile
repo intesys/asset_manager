@@ -1,14 +1,11 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
 
 # Declare your gem's dependencies in asset_manager.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
 
-gem 'globalize3'#, git: 'git://github.com/svenfuchs/globalize3.git'
-
-# jquery-rails is used by the dummy application
-gem "jquery-rails"
+#gem 'globalize3'#, git: 'git://github.com/svenfuchs/globalize3.git'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
@@ -18,4 +15,6 @@ gem "jquery-rails"
 # To use debugger
 #gem 'debugger'
 
-gem "thin"
+gem 'jquery-rails'
+gem 'thin'
+gem 'bootstrap-sass', '~> 2'

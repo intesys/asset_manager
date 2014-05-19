@@ -1,29 +1,51 @@
-= title @asset.title
+= content_for :page_title do
+  = am_title @asset.title
+= content_for :page_actions do
+  = link_to(edit_asset_path(@asset), class: 'btn') do
+    %i.icon-pencil
+    = t('.edit')
 
-.well
-  %table.table.table-bordered.table-condensed
+%table.table.table-bordered.table-condensed.table-striped
+  %thead
+    %tr
+      %th{ colspan: 2 }= t('.general')
+  %tbody
+    %tr
+      %td= t('.id')
+      %td= @asset.id
+    %tr
+      %td= t('.created_at')
+      %td= @asset.created_at
+    %tr
+      %td= t('.updated_at')
+      %td= @asset.updated_at
+
+%table.table.table-bordered.table-condensed.table-striped
+  %thead
+    %tr
+      %th{ colspan: 2 }= t('.details')
+  %tbody
     %tr
       %td= t('.title')
-      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(", ")
+      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(', ')
     %tr
       %td= t('.description')
-      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.description}" }.join(", ")
-    %tr
-      %td= t('.asset_category')
-      %td= @asset.asset_category.title rescue ''
-    %tr
-      %td= t('.public')
-      %td= @asset.public
-    %tr
-      %td= t('.tags')
-      %td= @asset.tag_list
+      %td= @asset.translations.map{ |t| "[#{t.locale}] #{t.description}" }.join(', ')
+    - if AssetManager.with_categories
+      %tr
+        %td= t('.asset_category')
+        %td= @asset.asset_category.title rescue ''
+    - unless AssetManager.unique_asset_type?
+      %tr
+        %td= t('.public')
+        %td= @asset.public
+    - if AssetManager.with_tags
+      %tr
+        %td= t('.tags')
+        %td= @asset.tag_list
     %tr
       %td= t('.file_type')
       %td= @asset.file_type
     %tr
       %td= t('.asset_instances')
       %td= render partial: 'asset_manager/asset_instances/asset_instances', locals: { collection: @asset.asset_instances }
-
-= link_to t('.edit'), edit_asset_path(@asset)
-\|
-= link_to t('.back'), assets_path(public: @asset.public)

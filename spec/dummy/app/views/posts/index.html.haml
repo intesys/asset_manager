@@ -1,27 +1,29 @@
-%h1 Listing posts
+.page-header
+  %h1 Listing posts
 
-%table
-  %tr
-    %th Title
-    %th Sub title
-    - Post.file_fields.each do |field|
-      %th{style: 'background-color: lightblue'}= field
-    - Post.files_fields.each do |field|
-      %th{style: 'background-color: yellow'}= field
-    %th{colspan: 3} Actions
-
-  - @posts.each do |post|
+- if @posts.empty?
+  No items
+- else
+  %table.table.table-striped.table-bordered
     %tr
-      %td= post.title
-      %td= post.sub_title
-      - post.class.file_fields.each do |field|
-        %td= post.send(field).id rescue ''
-      - post.class.files_fields.each do |field|
-        %td= post.send(field).map(&:id) rescue '[]'
-      %td= link_to 'Show', post
-      %td= link_to 'Edit', edit_post_path(post)
-      %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Id
+      %th Title
+      %th Sub title
+      %th{style: 'background-color: lightblue'} Main Image
+      %th Actions
 
-%br
+    - @posts.each do |post|
+      %tr
+        %td= post.id
+        %td= post.title
+        %td= post.sub_title
+        %td= am_render(post, :main_image, version: :thumb)
+        %td
+          = link_to post do
+            %i.icon-eye-open
+          = link_to edit_post_path(post) do
+            %i.icon-pencil
+          = link_to post, method: :delete, data: { confirm: 'Are you sure?' } do
+            %i.icon-trash
 
-= link_to 'New Post', new_post_path
+= link_to 'New Post', new_post_path, class: 'btn btn-primary'

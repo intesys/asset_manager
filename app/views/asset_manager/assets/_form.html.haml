@@ -1,55 +1,63 @@
 = semantic_form_for @asset, multipart: true, builder: FormtasticBootstrap::FormBuilder, namespace: 'asset', class: 'form-horizontal' do |f|
-  - unless f.object.errors.empty?
-    .alert.alert-error= f.object.errors.inspect
+  = render partial: 'asset_manager/partials/form_errors', locals: { errors: f.object.errors }
+  = f.input :public, as: :hidden
   .form-horizontal
-    = f.inputs t('.translations'), class: 'translations' do
+    = f.inputs t('.translations'), class: 'translations', data: { count: I18n.available_locales.count } do
       = render 'asset_manager/partials/locales_tabs'
       .tab-content
         = f.semantic_fields_for :translations, @asset.translations do |ft|
-          = render 'translated_fields', :f => ft
-    = f.inputs t('.general'), class: 'general' do
-      = f.input :asset_category, collection: AssetManager::AssetCategory.sorted
-      = f.input :public, as: :hidden
-      = f.input :tag_list
-      = f.input :upload_type, as: :radio, collection: {:"#{t('.single')}" => :single, :"#{t('.multiple')}" => :multiple}
-    = f.inputs t('.files'), class: 'files' do
-      = f.semantic_fields_for "asset_#{@asset.public ? 'public' : 'private'}_instances".to_sym do |fr|
-        - ic = fr.object.instance_context
-        .field-file{for_all: (fr.object.is_all? ? 'T' : 'F')}
-          = fr.input :instance_context, as: :hidden
-          = fr.input :file, label: "File#{!fr.object.is_all? ? " (#{ic})" : ""}", as: :file
-          .item
-            - unless fr.object.file.blank?
-              .resource.asset-instance
-                %table.table.table-bordered
-                  %tr
-                    - if fr.object.asset.public && fr.object.asset.is_image?
-                      %td{width: '50px'}
-                        = image_tag fr.object.file.url(:thumb), class: 'img-polaroid', alt: ""
-                    - else
-                      %td{width: '20px'}
-                        = image_tag am_icon_url(fr.object.asset.file_type, nil, false), alt: ""
-                    %td
-                      = link_to fr.object.file_identifier, asset_instance_url(fr.object)
-                    %td{width: '30px'}
-                      = fr.input :_destroy, as: :boolean, label: ''
+          = render 'translated_fields', f: ft
+    - if AssetManager.with_categories || AssetManager.with_tags
+      = f.inputs t('.general'), class: 'general' do
+        - if AssetManager.with_categories
+          = f.input :asset_category, collection: AssetManager::AssetCategory.sorted
+        - if AssetManager.with_tags
+          = f.input :tag_list
+    = f.inputs 'File/s', class: 'general' do
+      #asset_instances
+        - association_name = "asset_#{@asset.public ? 'public' : 'private'}_instances".to_sym
+        = f.semantic_fields_for association_name do |asset_instance|
+          = render 'asset_instance_fields', f: asset_instance
+        - unless AssetManager::AssetInstance.instance_contexts_with_all.length == 1
+          .links= link_to_add_association '(+) ' +  t('.add_asset_instance'), f, association_name, partial: 'asset_instance_fields'
     = f.actions
 
 :javascript
   $(document).ready(function() {
-    $field_file_for_all = $(".field-file[for_all=T]")
-    $field_file_not_for_all = $(".field-file[for_all=F]")
-    $upload = $("input[name*='upload']")
-    $upload.click(function() {
-      if ($(this).val() == 'single') {
-        $field_file_for_all.show();
-        $field_file_not_for_all.hide();
-      } else {
-        $field_file_for_all.hide();
-        $field_file_not_for_all.show();
+    $('form').submit(function() {
+      submit = true;
+
+      // Check instance context
+      ics = new Array();
+      $('#asset_instances .nested-fields:visible').each(function() {
+        ic = $(this).find('select').val();
+        if ($.inArray(ic, ics) == -1) {
+          ics.push(ic);
+        } else {
+          submit = false;
+          alert('Non è possibile avere più files dello stesso contesto (' + ic + ')');
+          return false;
+        }
+      });
+
+      // Check files
+      numFiles = 0;
+      $('#asset_instances .nested-fields:visible').each(function() {
+        file = $(this).find('input[type=file]').val();
+        item = $(this).find('.item');
+        if (file || item) {
+          numFiles++;
+        }
+      });
+      if (! numFiles) {
+        submit = false;
+        alert('Non è possibile procedere senza aver selezionato un file');
+        return false;
+      }
+
+      if (! submit) {
+        return false;
       }
     });
-    if (($upload_checked = $("input[name*='upload']:checked")).length == 0) { $upload_checked = $upload.first() }
-    $upload_checked.trigger('click');
   });
 

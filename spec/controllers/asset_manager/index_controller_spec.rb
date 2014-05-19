@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe IndexController do
+describe AssetManager::IndexController do
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it 'returns http success' do
       get 'index'
       response.should be_success
     end

@@ -1,6 +1,6 @@
 !!! 5
 %html
   = render 'layouts/asset_manager/partials/head'
-  %body{:class => "#{controller.controller_name} #{controller.action_name}"}
+  %body{class: "#{controller.controller_name} #{controller.action_name}"}
     = content_for :header
     = content_for :content

@@ -1,7 +1,8 @@
-%h1 Editing asset_category
+= content_for :page_title do
+  = am_title t('.title')
+= content_for :page_actions do
+  = link_to(new_asset_category_path, class: 'btn') do
+    %i.icon-plus-sign
+    = t('.new_asset_category')
 
 = render 'form'
-
-= link_to t('.show'), @asset_category
-\|
-= link_to t('.back'), asset_categories_path

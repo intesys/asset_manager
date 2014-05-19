@@ -2,33 +2,56 @@
   .search
     .top
       .well
-        = form_tag(select_assets_path, method: 'get', class: 'form-inline', id: "search") do
+        = form_for @search, url: select_assets_path, html: { method: :get, class: 'form-inline', id: 'search' } do |f|
           .row-fluid
-            .span5
-              = select_tag :asset_categories, options_from_collection_for_select(@asset_categories, 'id', 'title', params[:asset_categories]), multiple: 'multiple', name: 'asset_categories[]', :"data-placeholder" => t('.choose_some_asset_categories')
-            .span5
-              = select_tag :tags, options_from_collection_for_select(@tags, 'name', 'name', params[:tags]), multiple: 'multiple', name: 'tags[]', :"data-placeholder" => t('.choose_some_tags')
+            .span10
+              - columns = 4
+              - columns -= 1 unless AssetManager.with_categories
+              - columns -= 1 unless AssetManager.with_tags
+              .row-fluid
+                %div{ class: "span#{12/columns}" }
+                  = f.label :translations_title_contains, t('.filter.title_contains')
+                  = f.text_field :translations_title_contains, style: 'width: 98%; padding-left: 1%; padding-right: 1%;'
+                - if AssetManager.with_categories
+                  %div{ class: "span#{12/columns}" }
+                    = f.label :asset_category_id_in, t('.filter.asset_categories')
+                    = f.collection_select :asset_category_id_in, AssetManager::AssetCategory.sorted, :id, :title, {}, { multiple: :multiple }
+                - if AssetManager.with_tags
+                  %div{ class: "span#{12/columns}" }
+                    = f.label :tags, t('.filter.tags')
+                    = select_tag :tags, options_from_collection_for_select(ActsAsTaggableOn::Tag.order(:name), 'name', 'name', params[:tags]), multiple: 'multiple', name: 'tags[]'
+                %div{ class: "span#{12/columns}" }
+                  = f.label :file_type_in, t('.filter.file_types')
+                  = f.select :file_type_in, AssetManager::Asset.all.map(&:file_type).uniq.compact.sort.reject(&:blank?), {}, { multiple: :multiple }
             .span2
               = hidden_field_tag :owner, @owner
               = hidden_field_tag :id, @id
               = hidden_field_tag :field, @field
               = hidden_field_tag :multiple, @multiple
-              = submit_tag :submit, class: 'btn btn-primary', value: t('.search')
+              = f.label :submit, raw('&nbsp;'), style: 'display: block'
+              %button.btn.btn-primary{ type: 'submit', name: 'commit' }
+                %i.icon-search.icon-white
+                = t('.search')
+
   .collection.clearfix
-    #sortable1.connectedSortable.clearfix
-      = render partial: 'assets_draggable', locals: {assets: @assets, pagination: true}
+    = render partial: 'quick_upload'
+    #sortable1.connectedSortable.clearfix.resources.assets
+      = render partial: 'assets_draggable', locals: { assets: @assets, pagination: true }
 .dx
   .associations
+    .well.well-small{ style: 'margin-bottom: 0' }
+      %h6{ style: 'margin: 0'}= "#{@owner} [#{@field}]"
     .assets-container-drag
       #sortable2.connectedSortable
-        = render partial: 'assets_draggable', locals: {assets: @resource_assets}
+        = render partial: 'assets_draggable', locals: { assets: @resource_assets }
     .actions
       %button.btn.btn-primary.select= t('.select')
       %button.btn.cancel= t('.cancel')
 
-.param-max.hide= @max
-.param-multiple.hide= @multiple
-.param-field.hide= @field
-.param-field-name.hide= "#{@owner.demodulize.underscore}[#{@owner.constantize.asset_field_name(@field, @multiple)}]#{@multiple ? '[]' : ''}"
-
-
+.hide
+  .param-max= @max
+  .param-multiple= @multiple
+  .param-field= @field
+  .param-field-name= "#{ActiveModel::Naming.param_key(@owner.constantize)}[#{@owner.constantize.am_field_name(@field, @multiple)}]#{@multiple ? '[]' : ''}"
+  .param-save= @save
+  .param-resource-id= @id

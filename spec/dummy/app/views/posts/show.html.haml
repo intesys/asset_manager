@@ -6,20 +6,18 @@
 %p
   %b Sub title:
   = @post.sub_title
-
-%fieldset
-  %legend File
-  - @post.class.file_fields.each do |field|
-    %p
-      %b= "#{field}:"
-      = @post.send(field).id rescue ''
-
-%fieldset
-  %legend Media
-  - @post.class.files_fields.each do |field|
-    %p
-      %b= "#{field}:"
-      = @post.send(field).map(&:id) rescue '[]'
+%p
+  %b Main image:
+  = am_render(@post, :main_image, version: :show)
+%p
+  %b Pictures:
+  = am_render(@post, :pictures, version: :thumb)
+%p
+  %b Main Card:
+  = am_render(@post, :main_card)
+%p
+  %b Downloads:
+  = am_render(@post, :downloads)
 
 = link_to 'Edit', edit_post_path(@post)
 \|

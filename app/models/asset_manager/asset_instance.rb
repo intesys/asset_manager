@@ -2,7 +2,10 @@ module AssetManager
   class AssetInstance < ActiveRecord::Base
     attr_accessible :file, :instance_context, :asset_id
 
-    belongs_to :asset, class_name: 'AssetManager::Asset', foreign_key: 'asset_id'
+    # validates :asset_id, presence: true
+    validates :instance_context, presence: true
+    validates :file, presence: true
+    validates_uniqueness_of :asset_id, scope: [:instance_context]
 
     after_destroy do
       if asset.asset_instances.empty?
@@ -24,7 +27,7 @@ module AssetManager
     end
 
     def self.instance_contexts_with_all
-      [self.instance_context_all] | self.instance_contexts
+      [instance_context_all] | instance_contexts
     end
   end
 end

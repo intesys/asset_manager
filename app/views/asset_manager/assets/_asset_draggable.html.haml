@@ -2,6 +2,7 @@
   .resource.asset.draggable{ data: { id: asset.id } }
     .thumbnail
       .caption
-        %h5= "#{asset.title} (#{asset.asset_category_id})"
+        %h5= asset.title
         .details
           = render partial: 'asset_manager/asset_instances/asset_instances', locals: { collection: asset.asset_instances }
+

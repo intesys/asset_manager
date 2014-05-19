@@ -1,9 +1,14 @@
 - unless resource.nil?
+  - clippy ||= false
   .resource[resource]
-    - if resource.asset.public && resource.asset.is_image?
-      = image_tag resource.file.url(:thumb), class: 'img-polaroid', alt: ""
+    - if resource.file.version_exists?(:thumb) && File.exist?(resource.file.versions[:thumb].file.file)
+      = am_asset_instance_image(resource, version: :thumb, linked: true, link_options: { class: 'overlay', rel: "asset-#{resource.asset.id}"}, image_options: { class: 'img-polaroid' })
+    - elsif resource.file.version_exists?(:thumb_pdf) && File.exist?(resource.file.versions[:thumb_pdf].file.file)
+      = am_asset_instance_image(resource, version: :thumb_pdf, image_options: { class: 'img-polaroid', width: 50 })
     - else
-      = image_tag am_icon_url(resource.asset.file_type, nil, false), alt: ""
+      = image_tag am_ico_path(resource.asset.file_type), alt: ''
     %span
-      = "(#{resource.instance_context})"
-      = resource.file_identifier
+      = "(#{resource.instance_context})" if AssetManager::AssetInstance.instance_contexts_with_all.count > 1
+      = link_to resource.file_identifier, am_asset_instance_url(resource), target: '_blank'
+      - if clippy && AssetManager.with_clippy
+        = raw am_clippy(am_asset_instance_url(resource, download: true, force_frontend: true))

@@ -1,11 +1,30 @@
-= title @asset_category.title
+= content_for :page_title do
+  = am_title @asset_category.title
+= content_for :page_actions do
+  = link_to(edit_asset_category_path(@asset_category), class: 'btn') do
+    %i.icon-pencil
+    = t('.edit')
 
-.well
-  %table.table.table-bordered.table-condensed
+%table.table.table-bordered.table-condensed.table-striped
+  %thead
+    %tr
+      %th{ colspan: 2 }= t('.general')
+  %tbody
+    %tr
+      %td= t('.id')
+      %td= @asset_category.id
+    %tr
+      %td= t('.created_at')
+      %td= @asset_category.created_at
+    %tr
+      %td= t('.updated_at')
+      %td= @asset_category.updated_at
+
+%table.table.table-bordered.table-condensed.table-striped
+  %thead
+    %tr
+      %th{ colspan: 2 }= t('.details')
+  %tbody
     %tr
       %td= t('.title')
-      %td= @asset_category.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(", ")
-
-= link_to t('.edit'), edit_asset_category_path(@asset_category)
-\|
-= link_to t('.back'), asset_categories_path
+      %td= @asset_category.translations.map{ |t| "[#{t.locale}] #{t.title}" }.join(', ')

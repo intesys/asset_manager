@@ -1,14 +1,11 @@
 = semantic_form_for @post, multipart: true, namespace: 'post' do |f|
   -#= f.error_messages
-  = f.inputs do
+  = f.inputs 'General' do
     = f.input :title
     = f.input :sub_title
-  - unless (fields = @post.class.file_fields).empty?
-    = f.inputs "File" do
-      - fields.each do |field|
-        = f.input field, as: :asset_manager
-  - unless (fields = @post.class.files_fields).empty?
-    = f.inputs "Files" do
-      - fields.each do |field|
-        = f.input field, as: :asset_manager
+  = f.inputs 'AM Associations' do
+    = f.input :main_image, as: :asset_manager
+    = f.input :pictures, as: :asset_manager
+    = f.input :main_card, as: :asset_manager
+    = f.input :downloads, as: :asset_manager
   = f.actions

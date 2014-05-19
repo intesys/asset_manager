@@ -1,8 +1,7 @@
 - unless resource.nil?
   .resource[resource]
-    - size ||= nil
-    .presentation{style: "background: url(#{am_icon_url(resource.file_type, size, true)}) no-repeat 0 0;"}
-      %p.title= resource.title
-      - unless resource.description.nil?
-        %p.description= resource.description
+    .presentation{ style: "background: url(#{am_ico_path(resource.file_type, size: ico_size)}) no-repeat 0 0; padding-left: #{(ico_size.nil? ? 16 : ico_size.to_i) + 5}px" }
+      %p.title
+        = link_to_if (AssetManager::AssetInstance.instance_contexts_with_all.length == 1), resource.title, am_asset_url(resource)
+      %p.description= resource.description unless resource.description.nil?
     = render partial: 'asset_manager/asset_instances/asset_instances_as_flag', locals: { collection: resource.asset_instances }

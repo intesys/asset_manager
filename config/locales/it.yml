@@ -1,0 +1,181 @@
+it:
+
+  activerecord:
+    models:
+      asset_manager:
+        asset: Asset
+        asset_association: Asset Association
+        asset_category: Asset Category
+        asset_instance: Asset Instance
+        asset_private_instance: Private Asset Instance
+        asset_public_instance: Public Asset Instance
+    attributes:
+      asset_manager:
+        asset:
+          asset_category: Categoria
+          description: Descrizione
+          file_type: Tipo file
+          public: Publico
+          tag_list: Lista tag
+          title: Titolo
+
+  asset_manager:
+    asset_categories:
+      controller:
+        asset_category_successfully_create: Categoria creata con successo
+        asset_category_successfully_update: Categoria aggiornata con successo
+      edit:
+        title: Modifica Categoria
+        new_asset_category: Nuova Categoria
+        show: Visualizza Categoria
+      form:
+        translations: Traduzioni
+      index:
+        actions: Azioni
+        are_you_sure: Sei sicuro?
+        asset_categories: Categorie
+        asset_category_title: Titolo
+        clear: Annulla
+        destroy: Elimina
+        edit: Modifica
+        id: Id
+        new_asset_category: Nuova Categoria
+        no_results: Nessun risultato
+        search: Cerca
+        show: Visualizza
+        title_asset_categories: Categorie
+        title_contains: Titolo contiene
+      new:
+        title: Nuova Categoria
+      show:
+        general: Generale
+        details: Dettagli
+        id: Id
+        created_at: Creato il
+        updated_at: Modificato il
+        edit: Modifica Categoria
+        title: Titolo
+    assets:
+      controller:
+        asset_successfully_create: Asset creato con successo
+        asset_successfully_update: Asset modificato con successo
+      edit:
+        title: Modifica Asset
+        show: Visualizza Asset
+      form:
+        files: Files
+        general: Generale
+        multiple: Multiplo
+        single: Singolo
+        translations: Traduzioni
+        destroy: Elimina
+        add_asset_instance: Aggiungi
+      index:
+        actions: Azioni
+        are_you_sure: Sei sicuro?
+        asset_category: Categorie
+        asset_category_equal: Categoria uguale a
+        asset_instances: "Instanze dell'Asset"
+        assets: Assets
+        asset_title: Titolo
+        clear: Annulla
+        description: Descrizione
+        destroy: Elimina
+        edit: Modifica
+        file_type_equal: Tipologia file uguale a
+        file_type: Tipologia file
+        id: Id
+        no_results: Nessun risultato
+        private: Privato
+        public_equal: Pubblico uguale a
+        public: Pubblico
+        search: Cerca
+        show: Visualizza
+        tags: Tags
+        title_assets: Assets
+        title_or_description_contains: Titolo o descrizione contiene
+      new:
+        title: Nuovo Asset
+      new_actions:
+        new_asset: Nuovo Asset
+        new_private_asset: Nuovo Asset Privato
+        new_public_asset: Nuovo Asset Pubblico
+      select:
+        cancel: Annulla
+        search: Cerca
+        select: Seleziona
+        filter:
+          title_contains: Titolo contiene
+          asset_categories: Categorie
+          tags: Tags
+          file_types: Tipologie file
+      show:
+        general: Generale
+        details: Dettagli
+        id: Id
+        created_at: Creato il
+        updated_at: Modificato il
+        asset_category: Categoria
+        asset_instances: "Instanze dell'Asset"
+        description: Descrizione
+        edit: Modifica
+        file_type: Tipologia file
+        public: Pubblico
+        tags: Tags
+        title: Titolo
+      quick_upload:
+        quick_upload: Caricamento rapido
+      asset_instance_fields:
+        instance_context: Contesto
+        remove_asset_instance: Rimuovi
+    index:
+      index:
+        title: Benvenuto
+    partials:
+      form_errors:
+        errors: Errori
+
+  formtastic:
+    labels:
+      asset:
+        asset_category: Categoria
+        description: Descrizione
+        file_type: Tipo file
+        public: Publico
+        tag_list: Lista tag
+        title: Titolo
+      asset_category:
+        title: Titolo
+    titles:
+      asset:
+    hints:
+      asset:
+    placeholders:
+      asset:
+    actions:
+      cancel: "Annulla e torna indietro"
+      create: "Crea %{model}"
+      reset: "Reset form"
+      update: "Salva modifiche"
+
+  layouts:
+    asset_manager:
+      partials:
+        header:
+          assets: Assets
+          asset_categories: Categorie
+
+  pagination: "Pagina %{current_page} di %{total_pages} :: %{num_records} record su un totale di %{total_records}"
+  search_results:
+    all: Tutti
+    results: Resultati
+
+  views:
+    pagination:
+      bootstrap:
+        previous: Precedente
+        next: Successiva
+  labels:
+    filters: Filtri
+
+

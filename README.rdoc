@@ -1,3 +1,127 @@
 = Asset Manager
 
-*STATUS*: In development - not ready to be used.
+Asset Manager is a Ruby on Rails gem that allows you to:
+- Manage all your assets (images, pdf, zip, ecc.) in a central repository
+- Quickly connect instances of your models with this repository, through a nice graphical interface
+- Generate markup for your assets in your views with a series of helper methods
+To give you a practical example, you can upload an image through the Asset Manager and then associate it to a product and a news article without having to upload it twice. You just make your selection from the central repository.
+Asset Manager is generally included in an administration interface where the user manages all her assets and associates them with various application specific model instances. Then, on the frontend side, to present these assets to the end-user.
+
+Please note: Asset Manager doesn't have anything to do with Rails' asset pipeline!
+
+== Installation
+Add it to your Gemfile:
+  gem 'intesys_asset_manager'
+
+Install the migrations:
+  rake asset_manager:install:migrations
+  rake db:migrate
+
+== Usage
+Since Asset Manager is a Rails engine you need to mount it in your application:
+
+  in config/routes.rb:
+
+  Rails::Application.routes.draw do
+    mount AssetManager::Engine => '/asset_manager'
+  end
+
+Once mounted you can access the administration interface by visiting /asset_manager in a browser.
+
+{http://www.intesys.it/asset_manager/docs/am-repository.jpg}[http://www.intesys.it/asset_manager/docs/am-repository.jpg]
+
+From here you can manage all your application's assets: jpg, png, pdf, zip, etc.
+For the images that you upload a series of (customizable) versions will be created automatically.
+
+Next you need to specify which of your models will be connected to the Asset Manager.
+If, for example, we have a Product that has a main image and a series of pictures and downloads we add the following to our Product model:
+
+  class Product < ActiveRecord::Base
+    has_image :main_image
+    has_images :pictures, max: 10
+    has_files :downloads
+  end
+
+You have two methods to choose from: has_file when the association is singular and has_files when multiple files need to be associated. These methods accept a series of parameters to specify which file types are accepted, how many files can be associated (for has_files), etc.
+
+Once you have your models configured you can connect assets with your records. Asset Manager provides a Formtastic input type to make it easier for you to manage your forms (we will add support for Simpleform in the future):
+  = semantic_form_for @product do |f|
+    = f.inputs do
+      = f.input :title
+      = f.input :description
+    = f.inputs
+      = f.input :main_image, as: :asset_manager
+      = f.input :pictures, as: :asset_manager
+      = f.input :downloads, as: :asset_manager
+
+The Asset Manager will be opened in a modal window so you application needs to provide one. For example, if you're using Fancybox you need to add the following to your application.js:
+  //= require fancybox2
+  $ ->
+    $(".asset_manager_iframe").fancybox
+      type: 'iframe'
+      width: '100%'
+      height: '100%'
+      autoSize: false
+      helpers:
+        title:
+          type: 'outside'
+
+Then you will have something similar to:
+
+{http://www.intesys.it/asset_manager/docs/am-main_image-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-main_image-ass.jpg]
+{http://www.intesys.it/asset_manager/docs/am-pictures-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-pictures-ass.jpg]
+{http://www.intesys.it/asset_manager/docs/am-downloads-ass.jpg}[http://www.intesys.it/asset_manager/docs/am-downloads-ass.jpg]
+
+Now that we have associated assets with our records we can use one of the view helpers provided by Asset Manager to present them to the end-user:
+  = am_render(@product, :main_image)
+  = am_render(@product, :pictures)
+  = am_render(@product, :download)
+
+== Options
+
+Asset Manager can be configured through an initializer <b>config/initializers/asset_manager.rb</b>
+  AssetManager.configure do |config|
+    ...
+  end
+
+=== Private/Public Assets
+By default all your assets will be public. It's also possible to have private assets or a mix of both.
+  config.asset_types = [:public, :private]
+
+=== Categories and Tags
+Assets can be categoriezed and tagged to keep things organized.
+  config.with_categories = false
+  config.with_tags = false
+
+=== Image processing
+Asset Manager relies on ImageMagick to process images (for thumbnails etc.). To specify how the processing is done and which formats are created you can redefine <b>custom_versions</b>:
+  module AssetManager
+    module CustomVersions
+
+      # For a list of possible options, take a look at:
+      # http://carrierwave.rubyforge.org/rdoc/classes/CarrierWave/RMagick.html
+      def custom_versions
+        version :thumb, :if => :image? do
+          process :resize_and_pad => [50, 50]
+        end
+      end
+
+    end
+  end
+
+There is also a rake task to re-process already existing images when you add a new format:
+  rake asset_manager:recreate_versions
+
+== Project Roadmap
+
+- FCKEditor (Rich) integration
+- Input for SimpleForm
+- Evaluate dragonfly
+- Test :)
+
+== Project Info
+Asset Manager was created by {Federico Bonomi}[https://github.com/fbonomi] with contributions from {Nicola Prando}[https://github.com/pranik], {Daniel Jonasson}[https://github.com/djonasson] and {Umberto Gariggio}[https://github.com/gariggio]
+
+The project is hosted on Github: http://github.com/intesys/asset_manager, where your contributions, forkings, comments, issues and feedback are greatly welcomed.
+
+Copyright © 2012-2014 Intesys S.r.l., released under the MIT license.

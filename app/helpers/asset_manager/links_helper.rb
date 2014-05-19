@@ -1,17 +1,21 @@
 module AssetManager
   module LinksHelper
-
     def show_resource_link(resource)
-      link_to(t('.show', default: 'Show'), url_for(resource))
+      link_to url_for(resource), title: t('show', default: 'Show') do
+        content_tag(:i, class: 'icon-eye-open') { '' }
+      end
     end
 
     def edit_resource_link(resource)
-      link_to(t('.edit', default: 'Edit'), url_for(resource) + '/edit')
+      link_to url_for(resource) + '/edit', title: t('edit', default: 'Edit') do
+        content_tag(:i, class: 'icon-pencil') { '' }
+      end
     end
 
     def delete_resource_link(resource)
-      link_to(t('.delete', default: 'Delete'), url_for(resource), confirm: t('.delete_confirmation', default: "Are you sure?"), method: :delete)
+      link_to url_for(resource), title: t('delete', default: 'Delete'), confirm: t('.delete_confirmation', default: 'Are you sure?'), method: :delete do
+        content_tag(:i, class: 'icon-remove') { '' }
+      end
     end
-
   end
 end

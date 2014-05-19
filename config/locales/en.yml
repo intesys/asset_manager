@@ -1,11 +1,32 @@
 en:
+
+  activerecord:
+    models:
+      asset_manager:
+        asset: Asset
+        asset_association: Asset Association
+        asset_category: Asset Category
+        asset_instance: Asset Instance
+        asset_private_instance: Private Asset Instance
+        asset_public_instance: Public Asset Instance
+    attributes:
+      asset_manager:
+        asset:
+          asset_category: Category
+          description: Description
+          file_type: File Type
+          public: Public
+          tag_list: Tag List
+          title: Title
+
   asset_manager:
     asset_categories:
       controller:
         asset_category_successfully_create: Asset category was successfully created
         asset_category_successfully_update: Asset category was successfully updated
       edit:
-        back: Back
+        title: Editing Asset Category
+        new_asset_category: New Asset Category
         show: Show
       form:
         translations: Translations
@@ -13,24 +34,33 @@ en:
         actions: Actions
         are_you_sure: Are you sure?
         asset_categories: Asset Categories
+        asset_category_title: Title
+        clear: Clear
         destroy: Destroy
         edit: Edit
         id: Id
         new_asset_category: New Asset Category
+        no_results: No results found
+        search: Search
         show: Show
-        title: Title
+        title_asset_categories: Asset Categories
+        title_contains: Title contains
       new:
-        back: Back
+        title: New Asset Category
       show:
-        back: Back
-        edit: Edit
+        general: General
+        details: Details
+        id: Id
+        created_at: Created At
+        updated_at: Updated At
+        edit: Edit Asset Category
         title: Title
     assets:
       controller:
         asset_successfully_create: Asset was successfully created
         asset_successfully_update: Asset was successfully updated
       edit:
-        back: Back
+        title: Editing Asset
         show: Show
       form:
         files: Files
@@ -38,42 +68,112 @@ en:
         multiple: Multiple
         single: Single
         translations: Translations
+        destroy: Delete
+        add_asset_instance: Add
       index:
         actions: Actions
         are_you_sure: Are you sure?
         asset_category: Asset Category
+        asset_category_equal: Asset category equal
         asset_instances: Asset Instances
         assets: Assets
+        asset_title: Title
+        clear: Clear
         description: Description
         destroy: Destroy
         edit: Edit
+        file_type_equal: File type equal
         file_type: File Type
         id: Id
-        new_asset: New Asset
+        no_results: No results found
         private: Private
+        public_equal: Public equal
         public: Public
+        search: Search
         show: Show
         tags: Tags
-        title: Title
+        title_assets: Assets
+        title_or_description_contains: Title or description contains
       new:
-        back: Back
+        title: New Asset
+      new_actions:
+        new_asset: New Asset
+        new_private_asset: New Private Asset
+        new_public_asset: New Public Asset
       select:
         cancel: Cancel
-        choose_some_asset_categories: Choose some asset categories
-        choose_some_tags: Choose some tags
         search: Search
         select: Select
+        filter:
+          title_contains: Title contains
+          asset_categories: Asset categories
+          tags: Tags
+          file_types: File types
       show:
+        general: General
+        details: Details
+        id: Id
+        created_at: Created At
+        updated_at: Updated At
         asset_category: Asset Category
         asset_instances: Asset Instances
-        back: Back
         description: Description
-        edit: Edit
+        edit: Edit Asset
         file_type: File type
         public: Public
         tags: Tags
         title: Title
+      quick_upload:
+        quick_upload: Quick Upload
+      asset_instance_fields:
+        instance_context: Instance Context
+        remove_asset_instance: Remove
+    index:
+      index:
+        title: Welcome
+    partials:
+      form_errors:
+        errors: Errors
+
+  formtastic:
+    labels:
+      asset:
+        asset_category: Categoria
+        description: Descrizione
+        file_type: Tipo file
+        public: Publico
+        tag_list: Lista tag
+        title: Titolo
+      asset_category:
+        title: Titolo
+    titles:
+      asset:
+    hints:
+      asset:
+    placeholders:
+      asset:
+    actions:
+      cancel: "Annulla e torna indietro"
+      create: "Crea %{model}"
+      reset: "Reset form"
+      update: "Salva modifiche"
+
+  layouts:
+    asset_manager:
+      partials:
+        header:
+          assets: Assets
+          asset_categories: Asset Categories
+
+  pagination: "Page %{current_page} of %{total_pages} :: %{num_records} records out of a total of %{total_records}"
   search_results:
     all: All
     results: Results
 
+  views:
+    pagination:
+      bootstrap:
+        previous: Previous
+        next: Next
+  labels:
+    filters: Filters

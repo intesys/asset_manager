@@ -47,7 +47,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +56,6 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    #abort params.inspect
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -64,7 +63,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

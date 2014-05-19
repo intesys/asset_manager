@@ -1,4 +1,4 @@
 %ul.nav.nav-tabs#myTab
   - I18n.available_locales.each do |locale|
     %li{class: "#{locale.to_sym == I18n.default_locale.to_sym ? 'active' : ''}"}
-      = link_to locale, "##{locale.to_s}", :"data-toggle" => "tab"
+      = link_to locale, "##{locale.to_s}", data: { toggle: 'tab' }

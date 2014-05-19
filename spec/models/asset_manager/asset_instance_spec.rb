@@ -1,5 +1,7 @@
 require 'spec_helper'
 
-describe AssetInstance do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe AssetManager::AssetInstance do
+  it { should validate_presence_of(:asset_id) }
+  it { should validate_presence_of(:instance_context) }
+  it { should validate_presence_of(:file) }
 end

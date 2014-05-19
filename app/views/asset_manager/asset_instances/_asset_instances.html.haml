@@ -1,4 +1,5 @@
 - unless collection.empty?
+  - clippy ||= false
   .resources.asset_manager_asset_instances
     - collection.each do |resource|
-      = render partial: 'asset_manager/asset_instances/asset_instance', locals: { resource: resource }
+      = render partial: 'asset_manager/asset_instances/asset_instance', locals: { resource: resource, clippy: clippy }

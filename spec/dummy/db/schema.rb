@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102141009) do
+ActiveRecord::Schema.define(:version => 20140514142814) do
 
   create_table "asset_manager_asset_associations", :force => true do |t|
     t.string   "owner_type"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121102141009) do
   end
 
   add_index "asset_manager_asset_associations", ["asset_id"], :name => "index_asset_manager_asset_associations_on_asset_id"
+  add_index "asset_manager_asset_associations", ["owner_id", "owner_type"], :name => "index_asset_associations_on_owner_id_and_owner_type"
 
   create_table "asset_manager_asset_categories", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -32,10 +33,10 @@ ActiveRecord::Schema.define(:version => 20121102141009) do
 
   create_table "asset_manager_asset_category_translations", :force => true do |t|
     t.integer  "asset_manager_asset_category_id"
-    t.string   "locale"
-    t.string   "title"
+    t.string   "locale",                          :null => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.string   "title"
   end
 
   add_index "asset_manager_asset_category_translations", ["asset_manager_asset_category_id"], :name => "index_a6d3347cbcba9257a6aa18f210798bd90f5ac6ed"
@@ -54,11 +55,11 @@ ActiveRecord::Schema.define(:version => 20121102141009) do
 
   create_table "asset_manager_asset_translations", :force => true do |t|
     t.integer  "asset_manager_asset_id"
-    t.string   "locale"
-    t.string   "title"
-    t.text     "description"
+    t.string   "locale",                 :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.string   "title"
+    t.text     "description"
   end
 
   add_index "asset_manager_asset_translations", ["asset_manager_asset_id"], :name => "index_3204a03d5ef9f558de346018e4e6b654d39688f0"
@@ -74,12 +75,12 @@ ActiveRecord::Schema.define(:version => 20121102141009) do
 
   add_index "asset_manager_assets", ["asset_category_id"], :name => "index_asset_manager_assets_on_asset_category_id"
 
-  create_table "news", :force => true do |t|
-    t.string   "title"
-    t.date     "date"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "user"
+    t.text     "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -99,11 +100,13 @@ ActiveRecord::Schema.define(:version => 20121102141009) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", :default => 0
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
 end

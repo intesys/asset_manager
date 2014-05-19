@@ -1,12 +1,26 @@
 table
   width: 100%
   margin-bottom: 1em
-  td.actions
-    width: 140px
-    text-align: right
-    ul, li
-      margin: 0
-      padding: 0
-    li
-      list-style: none inside
-      display: inline
+  th
+    background: #08c
+    line-height: 25px !important
+    color: #fff
+  td
+    &.id
+      width: 30px
+    &.actions
+      width: 62px
+      text-align: right
+      ul, li
+        margin: 0
+        padding: 0
+      li
+        list-style: none inside
+        display: inline
+      a
+        color: #000
+        &:hover
+          color: #0088cc
+  a
+    &, &:hover
+      text-decoration: none

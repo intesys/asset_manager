@@ -1,14 +1,17 @@
 $sx-width: 80%
 $dx-width: 100% - $sx-width
 
-body.assets
-  &.index
-    .nav-pills
-      margin-bottom: 10px
+body
+  &.assets, &.asset_categories
     .filters
+      +box-shadow(0 0 0)
+      padding: 10px
+      .filters-title
+        margin-bottom: 15px
+        font:
+          size: 14px
+          weight: bold
       form
-        h4
-          margin-top: 0
         label
           font-size: 13px
         input[type=text]
@@ -17,6 +20,25 @@ body.assets
           padding-right: 0
         select
           width: 100%
+    &.show
+      table
+        thead
+          tr
+            th
+              background: #e5e5e5
+              color: #333
+        tbody
+          tr
+            td
+              &:first-child
+                width: 20%
+                font-style: italic
+
+
+body.assets
+  &.index
+    .nav-pills
+      margin-bottom: 10px
   &.select
     padding: 0
     .sx
@@ -24,6 +46,7 @@ body.assets
       float: left
       width: $sx-width
       .search
+        z-index: 10
         position: fixed
         width: $sx-width
         background: white
@@ -33,12 +56,19 @@ body.assets
             margin-bottom: 0
             form
               margin: 0
+              select
+                width: 100%
               .chzn-container
                 width: 100% !important
               &.loading
                 background: url(/assets/loader.gif) no-repeat right center
       .collection
-        padding-top: 82px
+        padding-top: 107px
+        #quick_upload
+          width: $sx-internal-width
+          margin-bottom: 12px
+        .resources.assets
+          min-height: 200px
       #infscr-loading
         clear: both
         padding: 1em 0
@@ -56,12 +86,12 @@ body.assets
           border: 1px dotted #ccc
           padding: 10px
           margin-bottom: 1em
-          height: 85%
+          height: 80%
         #sortable2
           height: 100%
           overflow: auto
   .form-horizontal
-    .files
+    #asset_instances
       .control-group
         margin-bottom: 0
       .item
@@ -69,3 +99,6 @@ body.assets
         .resource.asset-instance
           table
             margin-bottom: 0
+            td
+              .controls
+                margin-left: 0

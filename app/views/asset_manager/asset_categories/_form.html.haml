@@ -1,9 +1,10 @@
 = semantic_form_for @asset_category, multipart: true, builder: FormtasticBootstrap::FormBuilder, namespace: 'asset_category' do |f|
+  = render partial: 'asset_manager/partials/form_errors', locals: { errors: f.object.errors }
   .form-horizontal
-    = f.inputs t('.translations') do
+    = f.inputs t('.translations'), class: 'translations', data: { count: I18n.available_locales.count } do
       = render 'asset_manager/partials/locales_tabs'
       .tab-content
         = f.semantic_fields_for :translations, @asset_category.translations do |ft|
-          = render 'translated_fields', :f => ft
+          = render 'translated_fields', f: ft
     = f.actions
 

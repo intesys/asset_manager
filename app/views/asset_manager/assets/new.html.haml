@@ -1,5 +1,4 @@
-%h1 New asset
+= content_for :page_title do
+  = am_title t('.title')
 
 = render 'form'
-
-= link_to t('.back'), assets_path(public: @asset.public)

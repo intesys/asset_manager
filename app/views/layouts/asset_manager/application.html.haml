@@ -4,8 +4,12 @@
 - content_for :content do
   .container-fluid
     .row-fluid
+      - if content_for?(:page_title)
+        .page-header
+          = yield(:page_title)
+          .btn-group
+            = yield(:page_actions)
       = render 'layouts/asset_manager/partials/flash_messages'
       = yield
-    = render 'layouts/asset_manager/partials/footer'
 
 = render 'layouts/asset_manager/base'

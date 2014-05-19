@@ -1,1 +1,1 @@
-require "asset_manager"
+require 'asset_manager'

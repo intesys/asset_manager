@@ -1,7 +1,6 @@
-%h1 Editing asset
+= content_for :page_title do
+  = am_title t('.title')
+= content_for :page_actions do
+  = render partial: 'new_actions'
 
 = render 'form'
-
-= link_to t('.show'), @asset
-\|
-= link_to t('.back'), assets_path(public: @asset.public)

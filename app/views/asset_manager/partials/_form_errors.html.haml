@@ -1,0 +1,7 @@
+- unless errors.empty?
+  .alert.alert-error
+    %h3= t('.errors')
+    %ul
+      - errors.messages.each do |field, message|
+        %li= field.to_s + ': ' + message.join(', ')
+

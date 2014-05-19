@@ -1,11 +1,11 @@
-%title= "Asset Manager - #{yield(:title)}"
-= stylesheet_link_tag "asset_manager/application", :media => "all"
+%title= "Asset Manager#{yield(:title) ? ' - ' + yield(:title) : ''}"
+= stylesheet_link_tag 'asset_manager', media: 'all'
 = csrf_meta_tags
-%meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-%meta{:content => "", :name => "description"}
-%meta{:content => "", :name => "author"}
+%meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+%meta{content: '', name: 'description'}
+%meta{content: '', name: 'author'}
 / Le HTML5 shim, for IE6-8 support of HTML5 elements
 /[if lt IE 9]
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 / Le fav and touch icons
-= javascript_include_tag "asset_manager/application"
+= javascript_include_tag 'asset_manager'

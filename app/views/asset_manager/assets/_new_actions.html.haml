@@ -1,0 +1,8 @@
+- if AssetManager.public_asset_type?
+  = link_to(new_asset_path(public: true), class: 'btn') do
+    %i.icon-plus-sign
+    = (AssetManager.unique_asset_type? ? t('.new_asset') : t('.new_public_asset'))
+- if AssetManager.private_asset_type?
+  = link_to(new_asset_path(public: false), class: 'btn') do
+    %i.icon-plus-sign
+    = (AssetManager.unique_asset_type? ? t('.new_asset') : t('.new_private_asset'))

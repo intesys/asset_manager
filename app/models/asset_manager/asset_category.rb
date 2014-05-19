@@ -10,7 +10,8 @@ module AssetManager
 
     attr_accessible :title, :translations_attributes
 
-    translates :title, { fallbacks_for_empty_translations: true }
+    translates :title, fallbacks_for_empty_translations: true
+    include TouchTranslation
 
     accepts_nested_attributes_for :translations
 

@@ -1,4 +1,4 @@
-- unless collection.empty?
+- if AssetManager::AssetInstance.instance_contexts_with_all.length > 1 && !collection.empty?
   .group
     - if collection.count == 1 && collection.first.instance_context.to_sym == AssetManager::AssetInstance.instance_context_all
       .item

@@ -1,22 +1,43 @@
-= title t('.asset_categories')
+= content_for :page_title do
+  = am_title t('.title_asset_categories')
+= content_for :page_actions do
+  = link_to(new_asset_category_path, class: 'btn') do
+    %i.icon-plus-sign
+    = t('.new_asset_category')
 
-%p= link_to t('.new_asset_category'), new_asset_category_path, class: 'btn'
+.row-fluid
+  .span10
+    - if @asset_categories.empty?
+      = t('.no_results')
+    - else
+      %table.table.table-striped.table-bordered.table-hover.table-condensed
+        %thead
+          %tr
+            %th= t('.id')
+            %th= t('.asset_category_title')
+            %th.actions= t('.actions')
+        %tbody
+          - @asset_categories.each do |asset_category|
+            %tr
+              %td.id= asset_category.id
+              %td= asset_category.title
+              %td.actions
+                %ul
+                  %li= show_resource_link(asset_category)
+                  %li= edit_resource_link(asset_category)
+                  %li= delete_resource_link(asset_category)
 
-%table.table.table-striped.table-bordered.table-hover.table-condensed
-  %thead
-    %tr
-      %th= t('.id')
-      %th= t('.title')
-      %th.actions= t('.actions')
-  %tbody
-    - @asset_categories.each do |asset_category|
-      %tr
-        %td= asset_category.id
-        %td= asset_category.title
-        %td.actions
-          %ul
-            %li= show_resource_link(asset_category)
-            %li= edit_resource_link(asset_category)
-            %li= delete_resource_link(asset_category)
-
-= paginate @asset_categories, theme: "bootstrap"
+      = render partial: 'asset_manager/partials/pagination_status', locals: { collection: @asset_categories, total_records: @total_records }
+      = paginate @asset_categories, theme: 'bootstrap'
+  .span2
+    .well.filters
+      .filters-title= t('labels.filters')
+      = form_for @search, url: asset_categories_path, html: { method: :get, style: 'margin-bottom: 0' } do |f|
+        %div
+          = f.label :translations_title_contains, t('.title_contains')
+          = f.text_field :translations_title_contains
+        %div
+          %button.btn{ type: 'submit', name: 'commit' }
+            %i.icon-search
+            = t('.search')
+          = link_to t('.clear'), asset_categories_path

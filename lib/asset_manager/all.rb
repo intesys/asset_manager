@@ -1,3 +1,5 @@
-#require 'asset_manager/x'
+require 'asset_manager/extensions/all'
 require 'custom_versions.rb'
+require 'touch_translation.rb'
 require 'translations.rb'
+require 'deprecated.rb'

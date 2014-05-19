@@ -1,0 +1,20 @@
+#quick_upload
+  = link_to 'javascript:void(0)', class: 'link-upload' do
+    %i.icon-plus-sign
+    %span= t('.quick_upload')
+  .well.hide
+    = form_for AssetManager::Asset.new, url: quick_upload_assets_path do |f|
+      - asset_type = AssetManager.asset_types.first
+      = f.hidden_field :public, value: (asset_type == :public ? true : false)
+      = f.hidden_field :instance_context, name: "asset[asset_#{asset_type}_instances_attributes][0][instance_context]", value: AssetManager::AssetInstance.instance_context_all
+      = f.hidden_field :locale, name: 'asset[translations_attributes][0][locale]', value: I18n.default_locale
+      .row-fluid
+        .span4
+          = f.text_field :title, name: 'asset[translations_attributes][0][title]', class: 'span12', placeholder: 'Title'
+        .span4
+          = f.file_field :file, name: "asset[asset_#{asset_type}_instances_attributes][0][file]"
+    %script#template-upload{ type: 'text/x-tmpl'}
+      .upload
+        = '{%=o.name%}'
+        .progress.progress-striped.active
+          .bar{ style: 'width: 0%'}

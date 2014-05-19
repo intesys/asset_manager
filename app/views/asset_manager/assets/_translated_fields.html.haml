@@ -1,4 +1,4 @@
-%div{:id => f.object.locale, :class => "tab-pane#{f.object.locale.to_sym == I18n.default_locale.to_sym ? ' active' : ''}"}
-  = f.input :locale, :as => :hidden
-  = f.input :title, :required => true
-  = f.input :description#, :required => true
+%div{id: f.object.locale, class: "tab-pane#{f.object.locale.to_sym == I18n.default_locale.to_sym ? ' active' : ''}"}
+  = f.input :locale, as: :hidden
+  = f.input :title, required: true
+  = f.input :description#, required: true
