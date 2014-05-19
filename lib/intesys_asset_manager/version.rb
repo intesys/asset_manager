@@ -1,3 +1,3 @@
 module AssetManager
-  VERSION = '0.1.42'
+  VERSION = '1.0.0'
 end
