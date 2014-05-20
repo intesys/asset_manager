@@ -54,7 +54,7 @@ Once you have your models configured you can connect assets with your records. A
       = f.input :pictures, as: :asset_manager
       = f.input :downloads, as: :asset_manager
 
-The Asset Manager will be opened in a modal window so you application needs to provide one. For example, if you're using Fancybox you need to add the following to your application.js:
+The Asset Manager will be opened in a modal window so your application needs to provide one. For example, if you're using Fancybox you need to add the following to your application.js:
   //= require fancybox2
   $ ->
     $(".asset_manager_iframe").fancybox
