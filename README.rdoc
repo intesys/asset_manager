@@ -75,7 +75,7 @@ Then you will have something similar to:
 Now that we have associated assets with our records we can use one of the view helpers provided by Asset Manager to present them to the end-user:
   = am_render(@product, :main_image)
   = am_render(@product, :pictures)
-  = am_render(@product, :download)
+  = am_render(@product, :downloads)
 
 == Options
 
