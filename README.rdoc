@@ -89,7 +89,7 @@ By default all your assets will be public. It's also possible to have private as
   config.asset_types = [:public, :private]
 
 === Categories and Tags
-Assets can be categoriezed and tagged to keep things organized.
+By default all your assets can be categoriezed and tagged to keep things organized. You can disable this option.
   config.with_categories = false
   config.with_tags = false
 
