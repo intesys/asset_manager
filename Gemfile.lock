@@ -1,14 +1,13 @@
 PATH
   remote: .
   specs:
-    intesys_asset_manager (1.0.0)
+    intesys_asset_manager (1.1.1)
       acts-as-taggable-on
       bootstrap_kaminari
       carrierwave (~> 0.10)
       chosen-rails (>= 0.13.2)
       cocoon
       coffee-rails
-      compass-rails
       fancybox2-rails (>= 0.2.6)
       formtastic-bootstrap
       globalize (~> 3.0)

@@ -5,7 +5,7 @@
   .container-fluid
     .row-fluid
       - if content_for?(:page_title)
-        .page-header
+        .page-header.clearfix
           = yield(:page_title)
           .btn-group
             = yield(:page_actions)
