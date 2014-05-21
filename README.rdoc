@@ -44,7 +44,7 @@ If, for example, we have a Product that has a main image and a series of picture
 
 You have two methods to choose from: has_file when the association is singular and has_files when multiple files need to be associated. These methods accept a series of parameters to specify which file types are accepted, how many files can be associated (for has_files), etc.
 
-Once you have your models configured you can connect assets with your records. Asset Manager provides a Formtastic input type to make it easier for you to manage your forms (we will add support for Simpleform in the future):
+Once you have your models configured you can connect assets with your records. Asset Manager provides Formtastic and SimpleForm input types to make it easier to manage your forms:
   = semantic_form_for @product do |f|
     = f.inputs do
       = f.input :title
@@ -115,7 +115,6 @@ There is also a rake task to re-process already existing images when you add a n
 == Project Roadmap
 
 - FCKEditor (Rich) integration
-- Input for SimpleForm
 - Evaluate dragonfly
 - Test :)
 

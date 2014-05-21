@@ -15,6 +15,10 @@ module AssetManager
         include AssetManager::AssetsHelper
         include AssetManager::AssetInstancesHelper
       end
+      ActiveSupport.on_load :active_record do
+        Formtastic::Inputs.autoload(:AssetManagerInput, 'formtastic/inputs/asset_manager_input')
+        SimpleForm::Inputs.autoload(:AssetManagerInput, 'simple_form/inputs/asset_manager_input')
+      end
     end
 
     if Rails.version > '3.1'
