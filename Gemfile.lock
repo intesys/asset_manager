@@ -1,11 +1,10 @@
 PATH
   remote: .
   specs:
-    intesys_asset_manager (1.1.1)
+    intesys_asset_manager (1.1.2)
       acts-as-taggable-on
       bootstrap_kaminari
       carrierwave (~> 0.10)
-      chosen-rails (>= 0.13.2)
       cocoon
       coffee-rails
       fancybox2-rails (>= 0.2.6)
@@ -72,12 +71,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    chosen-rails (1.1.0)
-      coffee-rails (>= 3.2)
-      compass-rails (>= 1.1.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
-    chunky_png (1.3.1)
     cocoon (1.2.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -86,13 +79,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (1.1.7)
-      compass (>= 0.12.2)
-      sprockets (<= 2.11.0)
     daemons (1.1.9)
     diff-lcs (1.2.4)
     erubis (2.7.0)
@@ -109,7 +95,6 @@ GEM
       actionpack (>= 3.0)
     formtastic-bootstrap (3.0.0)
       formtastic (>= 2.2)
-    fssm (0.2.10)
     globalize (3.1.0)
       activemodel (>= 3.1.0, < 4.0.0)
       activerecord (>= 3.1.0, < 4.0.0)

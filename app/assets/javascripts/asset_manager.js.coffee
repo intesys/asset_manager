@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require jquery.ui.all
 #= require bootstrap2/bootstrap
-#= require chosen-jquery
+#= require asset_manager/chosen-rails/chosen-jquery
 #= require ias/jquery.ias
 #= require fancybox
 #= require jquery-fileupload/basic

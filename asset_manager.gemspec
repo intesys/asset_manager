@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts-as-taggable-on'
   s.add_dependency 'bootstrap_kaminari'
   s.add_dependency 'carrierwave', '~> 0.10'
-  s.add_dependency 'chosen-rails', '>= 0.13.2'
   s.add_dependency 'cocoon'
   s.add_dependency 'coffee-rails'
   s.add_dependency 'fancybox2-rails', '>= 0.2.6'
