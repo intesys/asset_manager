@@ -112,6 +112,10 @@ Asset Manager relies on ImageMagick to process images (for thumbnails etc.). To 
 There is also a rake task to re-process already existing images when you add a new format:
   rake asset_manager:recreate_versions
 
+=== Default Image Formats
+A list of file formats that will be accepted for has_image and has_images.
+  config.default_image_formats = %w(jpg jpeg gif png)
+
 == Project Roadmap
 
 - FCKEditor (Rich) integration

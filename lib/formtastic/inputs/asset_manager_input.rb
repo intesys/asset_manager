@@ -1,5 +1,6 @@
 module Formtastic
   module Inputs
+
     class AssetManagerInput
       include Formtastic::Inputs::Base
 
@@ -26,5 +27,6 @@ module Formtastic
         end
       end
     end
+
   end
 end
