@@ -1,7 +1,7 @@
 module SimpleForm
   module Inputs
-    class AssetManagerInput < SimpleForm::Inputs::Base
 
+    class AssetManagerInput < SimpleForm::Inputs::Base
       def input
         template.content_tag(:div, class: 'asset_manager_container') do
           template.concat select_link
@@ -28,7 +28,7 @@ module SimpleForm
           end
         end
       end
-
     end
+
   end
 end
