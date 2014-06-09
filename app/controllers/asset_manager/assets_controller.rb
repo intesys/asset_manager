@@ -78,10 +78,9 @@ module AssetManager
       if ids
         @resource_assets = ((ids.length == 1 && ids[0] == 'no') ? [] : Asset.find_ordered(ids))
       else
-        @resource_assets = Array(owner_class.find(@id).send(@field))
+        @resource_assets = (@id ? Array(owner_class.find(@id).send(@field)) : [])
         ids = @resource_assets.map(&:id)
       end
-
       # Search
       params[:search][:asset_category_id_in].reject!(&:blank?) rescue nil
       params[:search][:file_type_in].reject!(&:blank?) rescue nil

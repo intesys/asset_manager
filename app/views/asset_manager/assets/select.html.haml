@@ -25,7 +25,7 @@
                   = f.select :file_type_in, AssetManager::Asset.all.map(&:file_type).uniq.compact.sort.reject(&:blank?), {}, { multiple: :multiple }
             .span2
               = hidden_field_tag :owner, @owner
-              = hidden_field_tag :id, @id
+              = hidden_field_tag :id, @id if @id
               = hidden_field_tag :field, @field
               = hidden_field_tag :multiple, @multiple
               = f.label :submit, raw('&nbsp;'), style: 'display: block'
