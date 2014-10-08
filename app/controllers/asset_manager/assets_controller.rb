@@ -64,11 +64,13 @@ module AssetManager
       @id = params[:id]
       @field = params[:field]
       @save = params[:save]
+      @locale = params[:locale]
+      @field_name = params[:field_name]
 
       owner_class = @owner.constantize
       fail ActiveRecord::RecordNotFound.new('Invalid Field') unless owner_class.am_has_field?(@field)
 
-      @multiple = owner_class.am_files_fields.include?(@field.to_sym)
+      @multiple = owner_class.am_multiple_field?(@field.to_sym)
       @max = owner_class.am_field_option(@field, :max)
       @type = owner_class.am_field_option(@field, :type)
       @accepted = owner_class.am_field_option(@field, :accepted)

@@ -3,7 +3,6 @@
 module AssetManager
   class AssetUploader < CarrierWave::Uploader::Base
     include CarrierWave::MiniMagick
-    include CarrierWave::MimeTypes
 
     storage :file
 

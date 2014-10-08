@@ -4,7 +4,7 @@ module AssetManager
     module AssetsHelper
       def asset_manager_select_link(resource, field, save = false)
         Rails.logger.warn ActiveSupport::Deprecation.warn("#{__callee__} is deprecated - use am_select instead.")
-        am_select_link(resource, field, save)
+        am_select_link(resource, field, save: save)
       end
 
       def am_icon_url(type, size = 16, frontend = true)
