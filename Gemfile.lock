@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    intesys_asset_manager (1.2.1)
+    intesys_asset_manager (1.2.3)
       acts-as-taggable-on
       bootstrap_kaminari
       carrierwave (~> 0.10)
@@ -116,7 +116,7 @@ GEM
     jquery-ui-rails (4.1.2)
       railties (>= 3.1.0)
     json (1.8.1)
-    kaminari (0.16.0)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     mail (2.5.4)

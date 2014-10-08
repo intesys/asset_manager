@@ -62,11 +62,15 @@ $ ->
       param_max = parseInt($('.param-max').html())
       param_multiple = $('.param-multiple').html()
       param_field = $('.param-field').html()
+      param_locale = $('.param-locale').html()
       param_field_name = $('.param-field-name').html()
       param_save = $('.param-save').html() == 'true'
       param_resource_id = $('.param-resource-id').html()
       $form_search = $('form#search')
-      $dinamyc_assets_field = parent.$("#dinamyc_assets_" + param_field + (if param_save then param_resource_id else ''))
+      dinamyc_assets_field_id = "#dinamyc_assets_" + param_field
+      dinamyc_assets_field_id += "_" + param_locale if param_locale
+      dinamyc_assets_field_id += param_resource_id if param_save
+      $dinamyc_assets_field = parent.$(dinamyc_assets_field_id)
       param_update_url = $dinamyc_assets_field.attr('data-update-url')
 
       # Submit form

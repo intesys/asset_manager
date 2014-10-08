@@ -76,6 +76,11 @@ class ActiveRecord::Base
       am_file_fields.include?(field.to_sym) || am_files_fields.include?(field.to_sym)
     end
 
+    def am_multiple_field?(field)
+      raise "undefined field #{field}" unless am_has_field?(field)
+      am_files_fields.include?(field.to_sym)
+    end
+
     def am_field_option(field, key)
       options = field_options(field)
       options[field.to_sym][key] rescue nil

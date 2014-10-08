@@ -28,6 +28,7 @@
               = hidden_field_tag :id, @id if @id
               = hidden_field_tag :field, @field
               = hidden_field_tag :multiple, @multiple
+              -#= hidden_field_tag :locale, @locale if @locale
               = f.label :submit, raw('&nbsp;'), style: 'display: block'
               %button.btn.btn-primary{ type: 'submit', name: 'commit' }
                 %i.icon-search.icon-white
@@ -51,7 +52,8 @@
 .hide
   .param-max= @max
   .param-multiple= @multiple
+  .param-locale= @locale
   .param-field= @field
-  .param-field-name= "#{ActiveModel::Naming.param_key(@owner.constantize)}[#{@owner.constantize.am_field_name(@field, @multiple)}]#{@multiple ? '[]' : ''}"
+  .param-field-name= @field_name
   .param-save= @save
   .param-resource-id= @id
