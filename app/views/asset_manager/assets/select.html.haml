@@ -28,6 +28,7 @@
               = hidden_field_tag :id, @id if @id
               = hidden_field_tag :field, @field
               = hidden_field_tag :multiple, @multiple
+              = hidden_field_tag :field_name, @field_name
               = hidden_field_tag :locale, @locale if @locale
               = f.label :submit, raw('&nbsp;'), style: 'display: block'
               %button.btn.btn-primary{ type: 'submit', name: 'commit' }
