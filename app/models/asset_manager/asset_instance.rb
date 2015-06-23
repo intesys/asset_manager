@@ -1,6 +1,6 @@
 module AssetManager
   class AssetInstance < ActiveRecord::Base
-    attr_accessible :file, :instance_context, :asset_id
+    # attr_accessible :file, :instance_context, :asset_id
 
     # validates :asset_id, presence: true
     validates :instance_context, presence: true

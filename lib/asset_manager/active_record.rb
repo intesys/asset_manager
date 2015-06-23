@@ -12,10 +12,10 @@ class ActiveRecord::Base
       @am_file_options = {} if @am_file_options.nil?
       @am_file_options[field] = options
 
-      attr_accessible am_field_name(field, false)
+      # attr_accessible am_field_name(field, false)
       attr_accessor am_field_name(field, false)
 
-      has_one "asset_association_#{field}".to_sym, as: :owner, class_name: 'AssetManager::AssetAssociation', conditions: { context: "#{field}" }
+      has_one "asset_association_#{field}".to_sym, -> { where(context: "#{field}") }, as: :owner, class_name: 'AssetManager::AssetAssociation'
       has_one "#{field}".to_sym, through: "asset_association_#{field}".to_sym, source: :asset, class_name: 'AssetManager::Asset'
 
       after_save :save_file_associations
@@ -39,9 +39,9 @@ class ActiveRecord::Base
       @am_files_options = {} if @am_files_options.nil?
       @am_files_options[field] = options
 
-      attr_accessible am_field_name(field, true)
+      # attr_accessible am_field_name(field, true)
 
-      has_many "asset_association_#{field}".to_sym, as: :owner, class_name: 'AssetManager::AssetAssociation', conditions: { context: "#{field}" }
+      has_many "asset_association_#{field}".to_sym, -> { where(context: "#{field}") }, as: :owner, class_name: 'AssetManager::AssetAssociation'
       has_many "#{field}".to_sym, through: "asset_association_#{field}".to_sym, source: :asset, class_name: 'AssetManager::Asset'
 
       after_save :save_files_associations

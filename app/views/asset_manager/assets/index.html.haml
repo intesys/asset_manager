@@ -48,19 +48,19 @@
       .filters-title= t('labels.filters')
       = form_for @search, url: assets_path, html: { method: :get, style: 'margin-bottom: 0' } do |f|
         %div
-          = f.label :translations_title_or_translations_description_contains, t('.title_or_description_contains')
-          = f.text_field :translations_title_or_translations_description_contains
+          = f.label :translations_title_or_translations_description_cont, t('.title_or_description_contains')
+          = f.text_field :translations_title_or_translations_description_cont
         - if AssetManager.with_categories
           %div
-            = f.label :asset_category_id_equals, t('.asset_category_equal')
-            = f.collection_select :asset_category_id_equals, AssetManager::AssetCategory.sorted, :id, :title, include_blank: true
+            = f.label :asset_category_id_eq, t('.asset_category_equal')
+            = f.collection_select :asset_category_id_eq, AssetManager::AssetCategory.sorted, :id, :title, include_blank: true
         - unless AssetManager.unique_asset_type?
           %div
-            = f.label :public_equals, t('.public_equal')
-            = f.select :public_equals, [true, false], include_blank: true
+            = f.label :public_eq, t('.public_equal')
+            = f.select :public_eq, [true, false], include_blank: true
         %div
-          = f.label :file_type_equals, t('.file_type_equal')
-          = f.select :file_type_equals, AssetManager::Asset.pluck(:file_type).uniq.compact, include_blank: true
+          = f.label :file_type_eq, t('.file_type_equal')
+          = f.select :file_type_eq, AssetManager::Asset.pluck(:file_type).uniq.compact, include_blank: true
         %div
           %button.btn{ type: 'submit', name: 'commit' }
             %i.icon-search

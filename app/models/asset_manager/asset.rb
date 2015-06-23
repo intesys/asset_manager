@@ -27,8 +27,8 @@ module AssetManager
       end
     end
 
-    attr_accessible :title, :description, :asset_category_id, :public, :tag_list, :asset_public_instances_attributes,
-                    :asset_private_instances_attributes, :translations_attributes, :file_type
+    # attr_accessible :title, :description, :asset_category_id, :public, :tag_list, :asset_public_instances_attributes,
+    #                 :asset_private_instances_attributes, :translations_attributes, :file_type
 
     translates :title, :description, fallbacks_for_empty_translations: true
     include TouchTranslation
@@ -47,7 +47,7 @@ module AssetManager
 
     validates :title, presence: true
 
-    scope :not_ids, lambda { |ids| { conditions: ['asset_manager_assets.id not in (?)', ids] } unless ids.empty? }
+    scope :not_ids, lambda { |ids| where('asset_manager_assets.id not in (?)', ids) unless ids.empty? }
     scope :by_category_id, lambda { |id| where(asset_category_id: id) unless id.blank? }
     scope :by_instance_context, lambda { |ic| includes(:asset_instances).where("instance_context = #{ic}") unless ic.nil? }
 

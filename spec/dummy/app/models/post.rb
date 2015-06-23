@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :sub_title
+  # attr_accessible :title, :sub_title
 
   has_many :comments
 

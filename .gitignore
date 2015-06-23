@@ -10,3 +10,4 @@ spec/dummy/.sass-cache
 tags
 .sass-cache/
 .idea/
+atlassian-ide-plugin.xml

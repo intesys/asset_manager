@@ -16,4 +16,4 @@ gemspec
 #gem 'debugger'
 
 gem 'thin'
-gem 'bootstrap-sass', '~> 2'
+gem 'bootstrap-sass'

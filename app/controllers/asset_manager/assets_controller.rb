@@ -5,9 +5,9 @@ module AssetManager
     before_filter :load_public, only: [:index, :new]
 
     def index
-      @search = AssetManager::Asset.metasearch(params[:search])
-      @assets = @search.relation.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
-      @total_records = @search.relation.count
+      @search = AssetManager::Asset.search(params[:search])
+      @assets = @search.result.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
+      @total_records = @search.result.count
     end
 
     def show
@@ -27,7 +27,7 @@ module AssetManager
     end
 
     def create
-      @asset = Asset.new(params[:asset])
+      @asset = Asset.new(resource_params)
       if @asset.save
         redirect_to edit_asset_url(@asset), flash: { success: t('asset_manager.assets.controller.asset_successfully_create') }
       else
@@ -39,7 +39,7 @@ module AssetManager
 
     def update
       @asset = Asset.find(params[:id])
-      if @asset.update_attributes(params[:asset])
+      if @asset.update_attributes(resource_params)
         redirect_to edit_asset_url(@asset), flash: { success: t('asset_manager.assets.controller.asset_successfully_update') }
       else
         @asset = build_translations(@asset)
@@ -86,8 +86,8 @@ module AssetManager
       # Search
       params[:search][:asset_category_id_in].reject!(&:blank?) rescue nil
       params[:search][:file_type_in].reject!(&:blank?) rescue nil
-      @search = AssetManager::Asset.metasearch(params[:search])
-      @assets = @search.relation
+      @search = AssetManager::Asset.search(params[:search])
+      @assets = @search.result
       @assets = @assets.not_ids(ids).public(@type).accepted(@accepted).send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(36).order(AssetManager::Asset.table_name + '.id DESC')
       @assets = @assets.tagged_with(params[:tags], any: true) unless params[:tags].nil?
 
@@ -99,7 +99,7 @@ module AssetManager
         tilte_by_filename = File.basename(params[:asset]["asset_#{params[:asset][:public] == 'true' ? 'public' : 'private'}_instances_attributes".to_sym]['0'][:file].original_filename, '.*').titleize
         params[:asset][:translations_attributes]['0'][:title] = tilte_by_filename
       end
-      @asset = Asset.create(params[:asset])
+      @asset = Asset.create(resource_params)
     end
 
     private
@@ -118,6 +118,13 @@ module AssetManager
     def build_translations(asset)
       asset.translations_for_locales(I18n.available_locales)
       asset
+    end
+
+    def resource_params
+      params.require(:asset).permit(:id, :public, :asset_category_id, :tag_list, :file_type,
+                                    translations_attributes: [:id, :title, :description, :locale],
+                                    asset_public_instances_attributes: [:id, :instance_context, :file, :_destroy],
+                                    asset_private_instances_attributes: [:id, :instance_context, :file, :_destroy])
     end
   end
 end
