@@ -15,7 +15,7 @@ module Formtastic
             template.content_tag(:div, id: input_id, no_items_label: no_items_label) do
               cr = object.send(method)
               unless cr.blank?
-                if cr.kind_of?(Array)
+                if cr.kind_of?(Array) || cr.kind_of?(ActiveRecord::Relation)
                   template.controller.view_context.render(partial: '/admin/asset_manager/assets/assets', locals: { collection: cr })
                 else
                   template.controller.view_context.render(partial: '/admin/asset_manager/assets/asset', locals: { resource: cr })
