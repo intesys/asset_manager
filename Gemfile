@@ -17,3 +17,4 @@ gemspec
 
 gem 'thin'
 gem 'bootstrap-sass', '~> 2'
+gem 'jquery-rails'
