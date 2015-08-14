@@ -18,23 +18,18 @@ Install the migrations:
   rake db:migrate
 
 == Usage
-Since Asset Manager is a Rails engine you need to mount it in your application:
+Since Asset Manager is a Rails engine you need to mount it in your application. In <b>config/routes.rb</b> add this:
+  mount AssetManager::Engine => '/asset_manager'
 
-  in config/routes.rb:
+Once mounted you can access the administration interface by visiting <b>http://localhost:3000/asset_manager</b> in a browser.
 
-  Rails::Application.routes.draw do
-    mount AssetManager::Engine => '/asset_manager'
-  end
-
-Once mounted you can access the administration interface by visiting /asset_manager in a browser.
-
-{http://www.intesys.it/asset_manager/docs/repository.jpg}[http://www.intesys.it/asset_manager/docs/repository.jpg]
+{http://s6.postimg.org/bwl4w3z4x/archive.png}[http://s6.postimg.org/bwl4w3z4x/archive.png]
 
 From here you can manage all your application's assets: jpg, png, pdf, zip, etc.
 For the images that you upload a series of (customizable) versions will be created automatically.
 
 Next you need to specify which of your models will be connected to the Asset Manager.
-If, for example, we have a Product that has a main image and a series of pictures and downloads we add the following to our Product model:
+If, for example, we have a <b>Product</b> that has a <b>main image</b> and a series of <b>pictures</b> and <b>downloads</b> we add the following to our Product model:
 
   class Product < ActiveRecord::Base
     has_image :main_image
@@ -42,7 +37,7 @@ If, for example, we have a Product that has a main image and a series of picture
     has_files :downloads
   end
 
-You have two methods to choose from: has_file when the association is singular and has_files when multiple files need to be associated. These methods accept a series of parameters to specify which file types are accepted, how many files can be associated (for has_files), etc.
+You have two methods to choose from: <b>has_file</b> when the association is singular and <b>has_files</b> when multiple files need to be associated. These methods accept a series of parameters to specify which file types are accepted, how many files can be associated (for has_files), etc.
 
 Once you have your models configured you can connect assets with your records. Asset Manager provides {Formtastic}[https://github.com/justinfrench/formtastic] and {SimpleForm}[https://github.com/plataformatec/simple_form] input types to make it easier to manage your forms:
   = semantic_form_for @product do |f|
@@ -54,8 +49,8 @@ Once you have your models configured you can connect assets with your records. A
       = f.input :pictures, as: :asset_manager
       = f.input :downloads, as: :asset_manager
 
-The Asset Manager will be opened in a modal window so your application needs to provide one. For example, if you're using Fancybox you need to add the following to your application.js:
-  //= require fancybox2
+The Asset Manager will be opened in a <b>modal window</b> so your application needs to provide one. For example, if you're using <b>Fancybox</b> you need to add the following to your <b>application.js</b>:
+  #= require fancybox2
   $ ->
     $(".asset_manager_iframe").fancybox
       type: 'iframe'
@@ -68,9 +63,20 @@ The Asset Manager will be opened in a modal window so your application needs to 
 
 Then you will have something similar to:
 
-{http://www.intesys.it/asset_manager/docs/main_image-ass.jpg}[http://www.intesys.it/asset_manager/docs/main_image-ass.jpg]
-{http://www.intesys.it/asset_manager/docs/pictures-ass.jpg}[http://www.intesys.it/asset_manager/docs/pictures-ass.jpg]
-{http://www.intesys.it/asset_manager/docs/downloads-ass.jpg}[http://www.intesys.it/asset_manager/docs/downloads-ass.jpg]
+{http://s6.postimg.org/rw3sfnv6p/demo.gif}[http://s6.postimg.org/rw3sfnv6p/demo.gif]
+
+Remeber to use the <b>am_permit_fields</b> method to update the list of permitted parameters. For instance:
+  class ProductsController < ApplicationController
+
+    # crud methods
+    ...
+
+    private
+
+    def product_params
+      params.require(:product).permit([:title, :description] + Product.am_permit_fields)
+    end
+  end
 
 Now that we have associated assets with our records we can use one of the view helpers provided by Asset Manager to present them to the end-user:
   = am_render(@product, :main_image)

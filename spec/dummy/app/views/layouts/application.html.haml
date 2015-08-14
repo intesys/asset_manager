@@ -28,6 +28,8 @@
             %ul.nav
               %li{ class: "#{controller_name == 'posts' ? 'active' : ''}"}
                 %a{href: posts_path} Posts
+              %li{ class: "#{controller_name == 'products' ? 'active' : ''}"}
+                %a{href: products_path} Products
             %ul.nav.pull-right
               %li
                 %a.asset_manager_iframe{href: asset_manager_path} Manage Assets

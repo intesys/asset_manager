@@ -90,6 +90,10 @@ class ActiveRecord::Base
       (multiple ? "#{field.to_s.singularize}_ids" : "#{field.to_s}_id").to_sym
     end
 
+    def am_permit_fields
+      am_file_fields.map{ |field| am_field_name(field, false) } + am_files_fields.map{ |field| [:"#{am_field_name(field, true)}" => []] }.flatten
+    end
+
     private
 
     def field_options(field)

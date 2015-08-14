@@ -1,0 +1,23 @@
+.page-header.clearfix{ style: 'background: none' }
+  %h1 Listing products
+
+- if @products.empty?
+  %p No items
+- else
+  %table
+    %tr
+      %th Title
+      %th Description
+      %th
+      %th
+      %th
+
+    - @products.each do |product|
+      %tr
+        %td= product.title
+        %td= product.description
+        %td= link_to 'Show', product
+        %td= link_to 'Edit', edit_product_path(product)
+        %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to 'New Product', new_product_path, class: 'btn btn-primary'

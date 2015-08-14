@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814071715) do
+ActiveRecord::Schema.define(version: 20150814090154) do
 
   create_table "asset_manager_asset_associations", force: :cascade do |t|
     t.string   "owner_type"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 20150814071715) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "sub_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

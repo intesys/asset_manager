@@ -16,4 +16,5 @@ gemspec
 #gem 'debugger'
 
 gem 'thin'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2'
+gem 'jquery-rails'

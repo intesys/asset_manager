@@ -10,14 +10,20 @@
   %b Main image:
   = am_render(@post, :main_image, version: :show)
 %p
-  %b Pictures:
-  = am_render(@post, :pictures, version: :thumb)
+  %b Images:
+  = am_render(@post, :images, version: :thumb)
 %p
-  %b Main Card:
-  = am_render(@post, :main_card)
+  %b Main file:
+  = am_render(@post, :main_file)
 %p
-  %b Downloads:
-  = am_render(@post, :downloads)
+  %b Files:
+  = am_render(@post, :files)
+%p
+  %b Not singulars:
+  = am_render(@post, :not_singulars)
+%p
+  %b Not plural:
+  = am_render(@post, :not_plural)
 
 = link_to 'Edit', edit_post_path(@post)
 \|
