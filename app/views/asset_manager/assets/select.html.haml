@@ -2,7 +2,7 @@
   .search
     .top
       .well
-        = form_for @search, url: select_assets_path, html: { method: :get, class: 'form-inline', id: 'search' } do |f|
+        = form_for @q, url: select_assets_path, html: { method: :get, class: 'form-inline', id: 'search' } do |f|
           .row-fluid
             .span10
               - columns = 4
@@ -10,8 +10,8 @@
               - columns -= 1 unless AssetManager.with_tags
               .row-fluid
                 %div{ class: "span#{12/columns}" }
-                  = f.label :translations_title_contains, t('.filter.title_contains')
-                  = f.text_field :translations_title_contains, style: 'width: 98%; padding-left: 1%; padding-right: 1%;'
+                  = f.label :translations_title_cont, t('.filter.title_contains')
+                  = f.text_field :translations_title_cont, style: 'width: 98%; padding-left: 1%; padding-right: 1%;'
                 - if AssetManager.with_categories
                   %div{ class: "span#{12/columns}" }
                     = f.label :asset_category_id_in, t('.filter.asset_categories')

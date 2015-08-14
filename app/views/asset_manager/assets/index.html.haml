@@ -46,7 +46,7 @@
   .span2
     .well.filters
       .filters-title= t('labels.filters')
-      = form_for @search, url: assets_path, html: { method: :get, style: 'margin-bottom: 0' } do |f|
+      = form_for @q, url: assets_path, html: { method: :get, style: 'margin-bottom: 0' } do |f|
         %div
           = f.label :translations_title_or_translations_description_cont, t('.title_or_description_contains')
           = f.text_field :translations_title_or_translations_description_cont

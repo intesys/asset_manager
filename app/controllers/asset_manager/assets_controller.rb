@@ -5,9 +5,9 @@ module AssetManager
     before_filter :load_public, only: [:index, :new]
 
     def index
-      @search = AssetManager::Asset.search(params[:search])
-      @assets = @search.result.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
-      @total_records = @search.result.count
+      @q = AssetManager::Asset.search(params[:q])
+      @assets = @q.result.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
+      @total_records = @q.result.count
     end
 
     def show
@@ -86,8 +86,8 @@ module AssetManager
       # Search
       params[:search][:asset_category_id_in].reject!(&:blank?) rescue nil
       params[:search][:file_type_in].reject!(&:blank?) rescue nil
-      @search = AssetManager::Asset.search(params[:search])
-      @assets = @search.result
+      @q = AssetManager::Asset.search(params[:q])
+      @assets = @q.result
       @assets = @assets.not_ids(ids).public(@type).accepted(@accepted).send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(36).order(AssetManager::Asset.table_name + '.id DESC')
       @assets = @assets.tagged_with(params[:tags], any: true) unless params[:tags].nil?
 

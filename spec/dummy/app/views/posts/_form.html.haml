@@ -5,7 +5,9 @@
     = f.input :sub_title
   = f.inputs 'AM Associations' do
     = f.input :main_image, as: :asset_manager
-    = f.input :pictures, as: :asset_manager
-    = f.input :main_card, as: :asset_manager
-    = f.input :downloads, as: :asset_manager
+    = f.input :images, as: :asset_manager
+    = f.input :main_file, as: :asset_manager
+    = f.input :files, as: :asset_manager
+    = f.input :not_singulars, as: :asset_manager
+    = f.input :not_plural, as: :asset_manager
   = f.actions

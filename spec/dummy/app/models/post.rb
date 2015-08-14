@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 
   has_many :comments
 
-  validate :title, presence: true
+  validates :title, presence: true
 
   has_image :main_image
   has_images :images

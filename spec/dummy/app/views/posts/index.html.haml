@@ -1,8 +1,8 @@
-.page-header
+.page-header.clearfix
   %h1 Listing posts
 
 - if @posts.empty?
-  No items
+  %p No items
 - else
   %table.table.table-striped.table-bordered
     %tr

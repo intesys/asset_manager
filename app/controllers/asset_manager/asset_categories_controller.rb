@@ -3,9 +3,9 @@ require_dependency 'asset_manager/application_controller'
 module AssetManager
   class AssetCategoriesController < ApplicationController
     def index
-      @search = AssetManager::AssetCategory.search(params[:search])
-      @asset_categories = @search.result.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
-      @total_records = @search.result.count
+      @q = AssetManager::AssetCategory.ransack(params[:q])
+      @asset_categories = @q.result.send(Kaminari.config.page_method_name, params[Kaminari.config.param_name]).per(50).order('id DESC')
+      @total_records = @q.result.count
     end
 
     def show
