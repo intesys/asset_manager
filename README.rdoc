@@ -23,7 +23,7 @@ Since Asset Manager is a Rails engine you need to mount it in your application. 
 
 Once mounted you can access the administration interface by visiting <b>http://localhost:3000/asset_manager</b> in a browser.
 
-{https://raw.githubusercontent.com/intesys/asset_manager/master/archive.png}[https://raw.githubusercontent.com/intesys/asset_manager/master/archive.png]
+{https://raw.githubusercontent.com/intesys/asset_manager/master/archive.png}(https://raw.githubusercontent.com/intesys/asset_manager/master/archive.png)
 
 From here you can manage all your application's assets: jpg, png, pdf, zip, etc.
 For the images that you upload a series of (customizable) versions will be created automatically.
@@ -63,7 +63,7 @@ The Asset Manager will be opened in a <b>modal window</b> so your application ne
 
 Then you will have something similar to:
 
-{https://raw.githubusercontent.com/intesys/asset_manager/master/demo.gif}[https://raw.githubusercontent.com/intesys/asset_manager/master/demo.gif]
+{https://raw.githubusercontent.com/intesys/asset_manager/master/demo.gif}(https://raw.githubusercontent.com/intesys/asset_manager/master/demo.gif)
 
 Now that we have associated assets with our records we can use one of the view helpers provided by Asset Manager to present them to the end-user:
   = am_render(@product, :main_image)
