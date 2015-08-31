@@ -44,7 +44,14 @@ class ActiveRecord::Base
       has_many "asset_association_#{field}".to_sym, -> { where(context: "#{field}") }, as: :owner, class_name: 'AssetManager::AssetAssociation'
       has_many "#{field}".to_sym, through: "asset_association_#{field}".to_sym, source: :asset, class_name: 'AssetManager::Asset'
 
-      after_save :save_files_associations
+      define_method "#{field.to_s.singularize}_ids=" do |ids|
+        super(ids)
+        ids.each_with_index do |value, index|
+          aa = send("asset_association_#{field}").where(asset_id: value).first
+          aa.update_attributes(position: (index+1))
+        end
+      end
+
       after_destroy :destroy_file_and_files_associations
     end
 
@@ -102,7 +109,6 @@ class ActiveRecord::Base
 
   end
 
-
   private
 
   def save_file_associations
@@ -122,31 +128,6 @@ class ActiveRecord::Base
               asset_id: value.to_i,
               position: 1
           )
-        end
-      end
-    end
-  end
-
-  def save_files_associations
-    self.class.am_files_fields.each do |field|
-      values = send(self.class.am_field_name(field, true))
-      unless values.nil?
-        ::AssetManager::AssetAssociation.destroy_all(
-            owner_type: self.class.name,
-            owner_id: id,
-            context: field
-        )
-        values.reject! { |a| a.to_s.strip.length == 0 }
-        unless values.empty?
-          values.each_with_index do |value, index|
-            ::AssetManager::AssetAssociation.create(
-                owner_type: self.class.name,
-                owner_id: id,
-                context: field,
-                asset_id: value.to_i,
-                position: (index + 1)
-            )
-          end
         end
       end
     end
