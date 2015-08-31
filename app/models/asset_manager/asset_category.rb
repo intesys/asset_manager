@@ -17,6 +17,6 @@ module AssetManager
 
     validates :title, presence: true
 
-    scope :sorted, -> { with_translations.order(:title) }
+    scope :sorted, -> { with_translations.order(:title).distinct }
   end
 end
