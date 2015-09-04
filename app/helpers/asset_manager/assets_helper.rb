@@ -49,8 +49,12 @@ module AssetManager
     end
 
     # Others
-    def am_select_link(resource, field, save = false)
-      href = asset_manager.select_assets_path(owner: resource.class.name, id: resource.id, field: field, save: save)
+    def am_select_link(resource, field, options = {})
+      options.assert_valid_keys(:save, :field_name)
+      options.reverse_merge!(save: false)
+      args = { owner: resource.class.name, id: resource.id, field: field, save: options[:save], field_name: options[:field_name]}
+      args[:locale] = resource.locale if resource.respond_to? :locale
+      href = asset_manager.select_assets_path(args)
       title = "Asset Manager - #{resource.class.name} - #{field}"
       content_tag(:a, href: href, class: 'asset_manager_iframe', title: title, data: { href: href }) {
         t('select', scope: [resource.class.i18n_scope, resource.class.name.demodulize.tableize, :show], default: 'Select')
