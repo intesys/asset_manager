@@ -6,7 +6,7 @@ module AssetManager
     belongs_to :owner, polymorphic: true
 
     validates :asset_id, presence: true
-    validates :owner_id, presence: true
+    # validates :owner_id, presence: true
     validates :owner_type, presence: true
     validates :context, presence: true
 
