@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    intesys_asset_manager (1.2.3)
+    intesys_asset_manager (1.2.4)
       acts-as-taggable-on
       bootstrap_kaminari
       carrierwave (~> 0.10)
@@ -82,7 +82,7 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    execjs (2.5.2)
+    execjs (2.6.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
@@ -129,7 +129,7 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     mime-types (1.23)
-    mini_magick (4.2.10)
+    mini_magick (4.3.3)
     mini_portile (0.5.0)
     multi_json (1.8.2)
     nokogiri (1.6.0)
@@ -212,6 +212,3 @@ DEPENDENCIES
   shoulda-matchers
   sqlite3
   thin
-
-BUNDLED WITH
-   1.10.6

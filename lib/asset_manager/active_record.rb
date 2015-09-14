@@ -45,11 +45,17 @@ class ActiveRecord::Base
       has_many "#{field}".to_sym, through: "asset_association_#{field}".to_sym, source: :asset, class_name: 'AssetManager::Asset'
 
       define_method "#{field.to_s.singularize}_ids=" do |ids|
-        super(ids)
-        ids.each_with_index do |value, index|
-          aa = send("asset_association_#{field}").where(asset_id: value).first
-          aa.update_attributes(position: (index+1))
+        result = super(ids)
+        asset_associations = send("asset_association_#{field}").to_a
+        asset_associations.each do |asset_association|
+          position = ids.find_index(asset_association.asset_id.to_s) + 1
+          if asset_association.new_record?
+            asset_association.position = position
+          else
+            asset_association.update_column(:position, position)
+          end
         end
+        result
       end
 
       after_destroy :destroy_file_and_files_associations
