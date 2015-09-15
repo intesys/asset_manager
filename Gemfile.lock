@@ -1,5 +1,5 @@
 PATH
-  remote: ../..
+  remote: .
   specs:
     intesys_asset_manager (1.2.3.3)
       acts-as-taggable-on
