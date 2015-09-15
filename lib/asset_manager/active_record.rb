@@ -41,7 +41,7 @@ class ActiveRecord::Base
 
       # attr_accessible am_field_name(field, true)
 
-      has_many "asset_association_#{field}".to_sym, -> { where(context: "#{field}") }, as: :owner, class_name: 'AssetManager::AssetAssociation', inverse_of: :owner
+      has_many "asset_association_#{field}".to_sym, -> { where(context: "#{field}") }, as: :owner, class_name: 'AssetManager::AssetAssociation'
       has_many "#{field}".to_sym, through: "asset_association_#{field}".to_sym, source: :asset, class_name: 'AssetManager::Asset'
 
       define_method "#{field.to_s.singularize}_ids=" do |ids|
