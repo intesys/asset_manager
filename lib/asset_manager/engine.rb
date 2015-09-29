@@ -14,7 +14,7 @@ module AssetManager
                                        'fancybox_sprite.png', 'fancybox_loading.gif', 'blank.gif', 'fancybox_overlay.png',
                                        'fancybox_sprite@2x.png', 'fancybox_loading@2x.gif', 'fancybox_buttons.png',
                                        'bootstrap/glyphicons-halflings.png', 'bootstrap/glyphicons-halflings-white.png',
-                                       'asset_manager/chosen-rails/chosen-sprite.png', 'asset_manager/chosen-rails/chosen-sprite@2x.png']
+                                       'asset_manager/chosen-rails/*.png', 'asset_manager/file_icons/**/*.png', 'ias/loader.gif']
 
       # We include the engine's helpers
       ActiveSupport.on_load :action_view do
