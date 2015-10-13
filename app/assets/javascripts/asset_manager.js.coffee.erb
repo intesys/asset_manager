@@ -58,7 +58,7 @@ $ ->
         item: ".resource.asset"
         pagination: ".assets-navigation"
         next: "a[rel=next]"
-        loader: '<img src="/assets/ias/loader.gif" alt="Loading..." />'
+        loader: '<img src="<%= image_path('ias/loader.gif') %>" alt="Loading..." />'
 
       # Params
       param_max = parseInt($('.param-max').html())

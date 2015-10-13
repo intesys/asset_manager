@@ -27,7 +27,7 @@ AssetManager::Asset.destroy_all
   a = AssetManager::Asset.create(
     title: "Title #{n + 1}",
     description: "Description #{n + 1}",
-    asset_category_id: AssetManager::AssetCategory.first(offset: rand(AssetManager::AssetCategory.count)).id,
+    asset_category_id: AssetManager::AssetCategory.all.sample.id,
     tag_list: tags.sample(2),
     public: true
   )
