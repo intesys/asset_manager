@@ -1,7 +1,0 @@
-<% if @asset.new_record? %>
-$('#quick_upload').find('.bar').addClass('bar-danger')
-alert("Failed to upload painting: <%= j @asset.errors.full_messages.join(', ').html_safe %>");
-<% else %>
-$('#quick_upload').find('.bar').addClass('bar-success')
-location.reload(true)
-<% end %>

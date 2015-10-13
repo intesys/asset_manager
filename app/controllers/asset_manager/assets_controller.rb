@@ -95,10 +95,8 @@ module AssetManager
     end
 
     def quick_upload
-      if params[:asset][:translations_attributes]['0'][:title].blank?
-        tilte_by_filename = File.basename(params[:asset]["asset_#{params[:asset][:public] == 'true' ? 'public' : 'private'}_instances_attributes".to_sym]['0'][:file].original_filename, '.*').titleize
-        params[:asset][:translations_attributes]['0'][:title] = tilte_by_filename
-      end
+      tilte_by_filename = File.basename(params[:asset]["asset_#{params[:asset][:public] == 'true' ? 'public' : 'private'}_instances_attributes".to_sym]['0'][:file].original_filename, '.*').titleize
+      params[:asset][:translations_attributes]['0'][:title] = tilte_by_filename
       @asset = Asset.create(resource_params)
     end
 

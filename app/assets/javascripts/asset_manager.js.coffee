@@ -44,10 +44,12 @@ $ ->
           data.context = $(tmpl("template-upload", file))
           $('#quick_upload .well').append(data.context)
           data.submit()
-        progress: (e, data) ->
-          if data.context
-            progress = parseInt(data.loaded / data.total * 100, 10)
-            data.context.find('.bar').css('width', progress + '%')
+        progressall: (e, data) ->
+          progress = parseInt(data.loaded / data.total * 100, 10)
+          $('#quick_upload .progress .bar').css('width', progress + '%')
+          if progress == 100
+            $('#quick_upload .bar').addClass('bar-success')
+            location.reload(true)
 
     if $('body').hasClass('assets select')
       # Ias - Infinite scroll
