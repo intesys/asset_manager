@@ -67,7 +67,12 @@ module AssetManager
       size = options[:size]
       file_name = type.to_s + '.png'
       file_path = ['asset_manager', 'file_icons', (size.to_s + 'x' + size.to_s), file_name].join('/')
-      if Rails.application.assets.find_asset(file_path).nil?
+      if Rails.application.config.assets.compile
+        file = Rails.application.assets.find_asset(file_path)
+      else
+        file = assets_manifest.assets[file_path]
+      end
+      if file.present?
         file_path.gsub!(file_name, 'default.png')
       end
       image_path(file_path)
