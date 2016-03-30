@@ -22,7 +22,9 @@
                     = select_tag :tags, options_from_collection_for_select(ActsAsTaggableOn::Tag.order(:name), 'name', 'name', params[:tags]), multiple: 'multiple', name: 'tags[]'
                 %div{ class: "span#{12/columns}" }
                   = f.label :file_type_in, t('.filter.file_types')
-                  = f.select :file_type_in, AssetManager::Asset.all.map(&:file_type).uniq.compact.sort.reject(&:blank?), {}, { multiple: :multiple }
+                  - all_types = AssetManager::Asset.all.map(&:file_type).uniq.compact.sort.reject(&:blank?)
+                  - file_types = (@accepted ? @accepted.select{ |i| all_types.include?(i) }.map{ |i| [i, i] } : all_types)
+                  = f.select :file_type_in, file_types, {}, { multiple: :multiple }
             .span2
               = hidden_field_tag :owner, @owner
               = hidden_field_tag :id, @id if @id

@@ -47,9 +47,9 @@ $ ->
         progressall: (e, data) ->
           progress = parseInt(data.loaded / data.total * 100, 10)
           $('#quick_upload .progress .bar').css('width', progress + '%')
-          if progress == 100
-            $('#quick_upload .bar').addClass('bar-success')
-            location.reload(true)
+        stop: (e, data) ->
+          $('#quick_upload .bar').addClass('bar-success')
+          location.reload(true)
 
     if $('body').hasClass('assets select')
       # Ias - Infinite scroll
