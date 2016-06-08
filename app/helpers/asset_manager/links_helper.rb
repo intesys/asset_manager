@@ -13,7 +13,7 @@ module AssetManager
     end
 
     def delete_resource_link(resource)
-      link_to url_for(resource), title: t('delete', default: 'Delete'), confirm: t('.delete_confirmation', default: 'Are you sure?'), method: :delete do
+      link_to url_for(resource), title: t('delete', default: 'Delete'), method: :delete, data: { confirm: t('.delete_confirmation', default: 'Are you sure?') } do
         content_tag(:i, class: 'icon-remove') { '' }
       end
     end
