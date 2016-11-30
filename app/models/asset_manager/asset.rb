@@ -4,7 +4,7 @@ module AssetManager
 
     before_validation do
       if file_type
-        asset_instances.clone.each do |asset_instance|
+        asset_instances.each do |asset_instance|
           unless asset_instance.file.blank?
             if asset_instance.file.file.extension.downcase != file_type.downcase
               errors[:file_type] << "File type deve esserere [#{file_type}]"
