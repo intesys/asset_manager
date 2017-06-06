@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 # Declare your gem's dependencies in asset_manager.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
-gemspec path: '../..'
+gemspec
 
 #gem 'globalize3'#, git: 'git://github.com/svenfuchs/globalize3.git'
 
