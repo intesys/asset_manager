@@ -15,13 +15,13 @@ gemspec
 # To use debugger
 #gem 'debugger'
 
-group :assets do
-  gem 'therubyracer'
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
+# group :assets do
+#   gem 'therubyracer'
+#   gem 'sass-rails'
+#   gem 'coffee-rails'
+#   gem 'uglifier'
+# end
 
 gem 'thin'
 gem 'bootstrap-sass', '~> 2'
-gem 'jquery-rails'
+# gem 'jquery-rails'
