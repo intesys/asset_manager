@@ -72,7 +72,7 @@ module AssetManager
       else
         file = assets_manifest.assets[file_path]
       end
-      if file.present?
+      unless file.present?
         file_path.gsub!(file_name, 'default.png')
       end
       image_path(file_path)
